@@ -12,6 +12,11 @@
 		181BF014245926C400080040 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 181BF012245926C400080040 /* Main.storyboard */; };
 		181BF016245926C600080040 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 181BF015245926C600080040 /* Assets.xcassets */; };
 		181BF019245926C600080040 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 181BF017245926C600080040 /* LaunchScreen.storyboard */; };
+		18E49AA724592BFB00EF7E64 /* ssss.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 18E49AA624592BFB00EF7E64 /* ssss.stringsdict */; };
+		18E49AAB24592C5900EF7E64 /* white_mode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 18E49AAA24592C5900EF7E64 /* white_mode.txt */; };
+		18E49AAD2459962B00EF7E64 /* theme_white.json in Resources */ = {isa = PBXBuildFile; fileRef = 18E49AAC2459962B00EF7E64 /* theme_white.json */; };
+		18E49AAF245996DF00EF7E64 /* UIColor+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E49AAE245996DF00EF7E64 /* UIColor+SwiftyTheme.swift */; };
+		18E49AB12459AD9200EF7E64 /* SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E49AB02459AD9200EF7E64 /* SwiftyTheme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +27,11 @@
 		181BF015245926C600080040 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		181BF018245926C600080040 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		181BF01A245926C600080040 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18E49AA624592BFB00EF7E64 /* ssss.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = ssss.stringsdict; sourceTree = "<group>"; };
+		18E49AAA24592C5900EF7E64 /* white_mode.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = white_mode.txt; sourceTree = "<group>"; };
+		18E49AAC2459962B00EF7E64 /* theme_white.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = theme_white.json; sourceTree = "<group>"; };
+		18E49AAE245996DF00EF7E64 /* UIColor+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+SwiftyTheme.swift"; sourceTree = "<group>"; };
+		18E49AB02459AD9200EF7E64 /* SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyTheme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +67,7 @@
 				181BF0202459275C00080040 /* Sources */,
 				181BF00C245926C400080040 /* AppDelegate.swift */,
 				181BF010245926C400080040 /* ViewController.swift */,
+				18E49AA524592BDA00EF7E64 /* Resources */,
 				181BF012245926C400080040 /* Main.storyboard */,
 				181BF015245926C600080040 /* Assets.xcassets */,
 				181BF017245926C600080040 /* LaunchScreen.storyboard */,
@@ -68,9 +79,21 @@
 		181BF0202459275C00080040 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				18E49AAE245996DF00EF7E64 /* UIColor+SwiftyTheme.swift */,
+				18E49AB02459AD9200EF7E64 /* SwiftyTheme.swift */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
+		};
+		18E49AA524592BDA00EF7E64 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				18E49AA624592BFB00EF7E64 /* ssss.stringsdict */,
+				18E49AAA24592C5900EF7E64 /* white_mode.txt */,
+				18E49AAC2459962B00EF7E64 /* theme_white.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -130,6 +153,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E49AAB24592C5900EF7E64 /* white_mode.txt in Resources */,
+				18E49AAD2459962B00EF7E64 /* theme_white.json in Resources */,
+				18E49AA724592BFB00EF7E64 /* ssss.stringsdict in Resources */,
 				181BF019245926C600080040 /* LaunchScreen.storyboard in Resources */,
 				181BF016245926C600080040 /* Assets.xcassets in Resources */,
 				181BF014245926C400080040 /* Main.storyboard in Resources */,
@@ -143,6 +169,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E49AAF245996DF00EF7E64 /* UIColor+SwiftyTheme.swift in Sources */,
+				18E49AB12459AD9200EF7E64 /* SwiftyTheme.swift in Sources */,
 				181BF011245926C400080040 /* ViewController.swift in Sources */,
 				181BF00D245926C400080040 /* AppDelegate.swift in Sources */,
 			);

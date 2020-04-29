@@ -1,0 +1,11 @@
+/*dsadssss*/
+//测试测试2
+
+
+
+"dasda" = "wer"; //嘻嘻
+"sadas" = "wer";
+"哈哈哈" = "😝";
+"white color 1" = "255,123,45";
+"white color 2" = "25, 12, 45";
+"black color 3" = "0xFFFFFF";
