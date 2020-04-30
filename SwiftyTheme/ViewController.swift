@@ -31,6 +31,7 @@ class ViewController: UIViewController {
 //
 //        print("\(dic)")
 //
+        self.view.st_theme
         
         
     }
@@ -43,4 +44,7 @@ class ViewController: UIViewController {
  主题切换：
  1、颜色
  2、图片
+ 
+ 一个开关，从一个tag到另一个tag，发出主题变化的通知
+ 
  */

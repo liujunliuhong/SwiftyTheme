@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1804AE09245AABC8003EB9E1 /* OCExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804AE08245AABC8003EB9E1 /* OCExampleViewController.m */; };
+		1804AE0E245AAD37003EB9E1 /* NSObject+SwiftyThemeSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804AE0D245AAD37003EB9E1 /* NSObject+SwiftyThemeSwizzle.m */; };
+		1804AE10245AB008003EB9E1 /* SwiftyThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1804AE0F245AB008003EB9E1 /* SwiftyThemeManager.swift */; };
 		181BF00D245926C400080040 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181BF00C245926C400080040 /* AppDelegate.swift */; };
 		181BF011245926C400080040 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181BF010245926C400080040 /* ViewController.swift */; };
 		181BF014245926C400080040 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 181BF012245926C400080040 /* Main.storyboard */; };
@@ -20,6 +23,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1804AE03245AA782003EB9E1 /* SwiftyTheme-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SwiftyTheme-Bridging-Header.h"; sourceTree = "<group>"; };
+		1804AE07245AABC8003EB9E1 /* OCExampleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OCExampleViewController.h; sourceTree = "<group>"; };
+		1804AE08245AABC8003EB9E1 /* OCExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCExampleViewController.m; sourceTree = "<group>"; };
+		1804AE0C245AAD37003EB9E1 /* NSObject+SwiftyThemeSwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+SwiftyThemeSwizzle.h"; sourceTree = "<group>"; };
+		1804AE0D245AAD37003EB9E1 /* NSObject+SwiftyThemeSwizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SwiftyThemeSwizzle.m"; sourceTree = "<group>"; };
+		1804AE0F245AB008003EB9E1 /* SwiftyThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyThemeManager.swift; sourceTree = "<group>"; };
 		181BF009245926C400080040 /* SwiftyTheme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyTheme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		181BF00C245926C400080040 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		181BF010245926C400080040 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,11 +76,14 @@
 				181BF0202459275C00080040 /* Sources */,
 				181BF00C245926C400080040 /* AppDelegate.swift */,
 				181BF010245926C400080040 /* ViewController.swift */,
+				1804AE07245AABC8003EB9E1 /* OCExampleViewController.h */,
+				1804AE08245AABC8003EB9E1 /* OCExampleViewController.m */,
 				18E49AA524592BDA00EF7E64 /* Resources */,
 				181BF012245926C400080040 /* Main.storyboard */,
 				181BF015245926C600080040 /* Assets.xcassets */,
 				181BF017245926C600080040 /* LaunchScreen.storyboard */,
 				181BF01A245926C600080040 /* Info.plist */,
+				1804AE03245AA782003EB9E1 /* SwiftyTheme-Bridging-Header.h */,
 			);
 			path = SwiftyTheme;
 			sourceTree = "<group>";
@@ -79,8 +91,11 @@
 		181BF0202459275C00080040 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				18E49AAE245996DF00EF7E64 /* UIColor+SwiftyTheme.swift */,
+				1804AE0F245AB008003EB9E1 /* SwiftyThemeManager.swift */,
 				18E49AB02459AD9200EF7E64 /* SwiftyTheme.swift */,
+				1804AE0C245AAD37003EB9E1 /* NSObject+SwiftyThemeSwizzle.h */,
+				1804AE0D245AAD37003EB9E1 /* NSObject+SwiftyThemeSwizzle.m */,
+				18E49AAE245996DF00EF7E64 /* UIColor+SwiftyTheme.swift */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -127,6 +142,7 @@
 				TargetAttributes = {
 					181BF008245926C400080040 = {
 						CreatedOnToolsVersion = 11.3;
+						LastSwiftMigration = 1130;
 					};
 				};
 			};
@@ -169,8 +185,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1804AE10245AB008003EB9E1 /* SwiftyThemeManager.swift in Sources */,
+				1804AE0E245AAD37003EB9E1 /* NSObject+SwiftyThemeSwizzle.m in Sources */,
 				18E49AAF245996DF00EF7E64 /* UIColor+SwiftyTheme.swift in Sources */,
 				18E49AB12459AD9200EF7E64 /* SwiftyTheme.swift in Sources */,
+				1804AE09245AABC8003EB9E1 /* OCExampleViewController.m in Sources */,
 				181BF011245926C400080040 /* ViewController.swift in Sources */,
 				181BF00D245926C400080040 /* AppDelegate.swift in Sources */,
 			);
@@ -316,6 +335,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2E8NVCJR97;
 				INFOPLIST_FILE = SwiftyTheme/Info.plist;
@@ -326,6 +346,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yinhe.SwiftyTheme;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftyTheme/SwiftyTheme-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -335,6 +357,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2E8NVCJR97;
 				INFOPLIST_FILE = SwiftyTheme/Info.plist;
@@ -345,6 +368,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yinhe.SwiftyTheme;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SwiftyTheme/SwiftyTheme-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
