@@ -56,6 +56,17 @@ internal struct SwiftyThemeKeys {
         static var progressTintColor_key = "com.yinhe.swiftyTheme.UIProgressView.progressTintColor"
         static var trackTintColor_key = "com.yinhe.swiftyTheme.UIProgressView.trackTintColor"
     }
+    
+    struct UISlider {
+        static var thumbTintColor_key = "com.yinhe.swiftyTheme.UISlider.thumbTintColor"
+        static var minimumTrackTintColor_key = "com.yinhe.swiftyTheme.UISlider.minimumTrackTintColor"
+        static var maximumTrackTintColor_key = "com.yinhe.swiftyTheme.UISlider.maximumTrackTintColor"
+    }
+    
+    struct UIPageControl {
+        static var pageIndicatorTintColor_key = "com.yinhe.swiftyTheme.UIPageControl.pageIndicatorTintColor"
+        static var currentPageIndicatorTintColor_key = "com.yinhe.swiftyTheme.UIPageControl.currentPageIndicatorTintColor"
+    }
 }
 
 
@@ -123,6 +134,18 @@ extension SwiftyTheme {
             }
             if let layer = object as? CALayer {
                 self.updateCALayerTheme(layer: layer)
+            }
+            if let tableView = object as? UITableView {
+                self.updateUITableViewTheme(tableView: tableView)
+            }
+            if let progressView = object as? UIProgressView {
+                self.updateUIProgressViewTheme(progressView: progressView)
+            }
+            if let slider = object as? UISlider {
+                self.updateUISliderTheme(slider: slider)
+            }
+            if let pageControl = object as? UIPageControl {
+                self.updateUIPageControlTheme(pageControl: pageControl)
             }
             self.updateNSObjectTheme(object: object)
         }
@@ -259,6 +282,64 @@ extension SwiftyTheme {
             if let key = objc_getAssociatedObject(tableView, &SwiftyThemeKeys.UITableView.sectionIndexTrackingBackgroundColor_key) as? String {
                 let value = SwiftyTheme.shared.getValue(key: key)
                 tableView.sectionIndexTrackingBackgroundColor = SwiftyTheme.shared.getColor(key: value)
+            }
+        }
+    }
+    
+    private func updateUIProgressViewTheme(progressView: UIProgressView) {
+        do {
+            // progressTintColor
+            if let key = objc_getAssociatedObject(progressView, &SwiftyThemeKeys.UIProgressView.progressTintColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                progressView.progressTintColor = SwiftyTheme.shared.getColor(key: value)
+            }
+        }
+        do {
+            // trackTintColor
+            if let key = objc_getAssociatedObject(progressView, &SwiftyThemeKeys.UIProgressView.trackTintColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                progressView.trackTintColor = SwiftyTheme.shared.getColor(key: value)
+            }
+        }
+    }
+    
+    private func updateUISliderTheme(slider: UISlider) {
+        do {
+            // thumbTintColor
+            if let key = objc_getAssociatedObject(slider, &SwiftyThemeKeys.UISlider.thumbTintColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                slider.thumbTintColor = SwiftyTheme.shared.getColor(key: value)
+            }
+        }
+        do {
+            // minimumTrackTintColor
+            if let key = objc_getAssociatedObject(slider, &SwiftyThemeKeys.UISlider.minimumTrackTintColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                slider.minimumTrackTintColor = SwiftyTheme.shared.getColor(key: value)
+            }
+        }
+        do {
+            // maximumTrackTintColor
+            if let key = objc_getAssociatedObject(slider, &SwiftyThemeKeys.UISlider.maximumTrackTintColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                slider.maximumTrackTintColor = SwiftyTheme.shared.getColor(key: value)
+            }
+        }
+    }
+    
+    private func updateUIPageControlTheme(pageControl: UIPageControl) {
+        do {
+            // pageIndicatorTintColor
+            if let key = objc_getAssociatedObject(pageControl, &SwiftyThemeKeys.UIPageControl.pageIndicatorTintColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                pageControl.pageIndicatorTintColor = SwiftyTheme.shared.getColor(key: value)
+            }
+        }
+        do {
+            // currentPageIndicatorTintColor
+            if let key = objc_getAssociatedObject(pageControl, &SwiftyThemeKeys.UIPageControl.currentPageIndicatorTintColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                pageControl.currentPageIndicatorTintColor = SwiftyTheme.shared.getColor(key: value)
             }
         }
     }

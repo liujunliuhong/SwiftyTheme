@@ -30,6 +30,8 @@
 		85000095246171D90000109E /* CAShapeLayer+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85000094246171D90000109E /* CAShapeLayer+SwiftyTheme.swift */; };
 		850000972461A8650000109E /* UITableView+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850000962461A8650000109E /* UITableView+SwiftyTheme.swift */; };
 		850000992461AB5B0000109E /* UIProgressView+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850000982461AB5B0000109E /* UIProgressView+SwiftyTheme.swift */; };
+		8500009B2461B2000000109E /* UISlider+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8500009A2461B2000000109E /* UISlider+SwiftyTheme.swift */; };
+		8500009D2461B51B0000109E /* UIPageControl+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8500009C2461B51B0000109E /* UIPageControl+SwiftyTheme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,8 @@
 		85000094246171D90000109E /* CAShapeLayer+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+SwiftyTheme.swift"; sourceTree = "<group>"; };
 		850000962461A8650000109E /* UITableView+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+SwiftyTheme.swift"; sourceTree = "<group>"; };
 		850000982461AB5B0000109E /* UIProgressView+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIProgressView+SwiftyTheme.swift"; sourceTree = "<group>"; };
+		8500009A2461B2000000109E /* UISlider+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISlider+SwiftyTheme.swift"; sourceTree = "<group>"; };
+		8500009C2461B51B0000109E /* UIPageControl+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIPageControl+SwiftyTheme.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,8 @@
 				85000094246171D90000109E /* CAShapeLayer+SwiftyTheme.swift */,
 				850000962461A8650000109E /* UITableView+SwiftyTheme.swift */,
 				850000982461AB5B0000109E /* UIProgressView+SwiftyTheme.swift */,
+				8500009A2461B2000000109E /* UISlider+SwiftyTheme.swift */,
+				8500009C2461B51B0000109E /* UIPageControl+SwiftyTheme.swift */,
 				18E49AAE245996DF00EF7E64 /* UIColor+SwiftyTheme.swift */,
 				1804AE0C245AAD37003EB9E1 /* NSObject+SwiftyThemeSwizzle.h */,
 				1804AE0D245AAD37003EB9E1 /* NSObject+SwiftyThemeSwizzle.m */,
@@ -216,8 +222,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8500009D2461B51B0000109E /* UIPageControl+SwiftyTheme.swift in Sources */,
 				850000972461A8650000109E /* UITableView+SwiftyTheme.swift in Sources */,
 				85000081246127E20000109E /* UIView+SwiftyTheme.swift in Sources */,
+				8500009B2461B2000000109E /* UISlider+SwiftyTheme.swift in Sources */,
 				8500009124615EBD0000109E /* NextViewController.swift in Sources */,
 				850000932461634B0000109E /* NSObject+SwiftyTheme.swift in Sources */,
 				850000872461294A0000109E /* UIButton+SwiftyTheme.swift in Sources */,
