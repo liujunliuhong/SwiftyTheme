@@ -10,15 +10,30 @@ import Foundation
 import UIKit
 
 extension CALayer {
-    @objc public func st_backgroundColor(key: String) {
-        
+    @discardableResult
+    @objc public func st_backgroundColor(key: String?) -> Self {
+        guard let key = key else { return self }
+        self.backgroundColor = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: key))?.cgColor
+        objc_setAssociatedObject(self, &SwiftyThemeKeys.CALayer.backgroundColor_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        SwiftyTheme.shared.hashTable.add(self)
+        return self
     }
     
-    @objc public func st_borderColor(key: String) {
-        
+    @discardableResult
+    @objc public func st_borderColor(key: String?) -> Self {
+        guard let key = key else { return self }
+        self.borderColor = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: key))?.cgColor
+        objc_setAssociatedObject(self, &SwiftyThemeKeys.CALayer.borderColor_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        SwiftyTheme.shared.hashTable.add(self)
+        return self
     }
     
-    @objc public func st_shadowColor(key: String) {
-        
+    @discardableResult
+    @objc public func st_shadowColor(key: String?) -> Self {
+        guard let key = key else { return self }
+        self.shadowColor = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: key))?.cgColor
+        objc_setAssociatedObject(self, &SwiftyThemeKeys.CALayer.shadowColor_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        SwiftyTheme.shared.hashTable.add(self)
+        return self
     }
 }

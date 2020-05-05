@@ -11,10 +11,12 @@ import UIKit
 
 
 extension UILabel {
-    @objc public func st_textColor(key: String?) {
-        guard let key = key else { return }
+    @discardableResult
+    @objc public func st_textColor(key: String?) -> Self {
+        guard let key = key else { return self }
         self.textColor = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: key))
         objc_setAssociatedObject(self, &SwiftyThemeKeys.UILabel.textColor_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         SwiftyTheme.shared.hashTable.add(self)
+        return self
     }
 }

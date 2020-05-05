@@ -27,6 +27,9 @@
 		8500008F246155600000109E /* dark_mode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8500008E246155600000109E /* dark_mode.txt */; };
 		8500009124615EBD0000109E /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8500009024615EBD0000109E /* NextViewController.swift */; };
 		850000932461634B0000109E /* NSObject+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850000922461634B0000109E /* NSObject+SwiftyTheme.swift */; };
+		85000095246171D90000109E /* CAShapeLayer+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85000094246171D90000109E /* CAShapeLayer+SwiftyTheme.swift */; };
+		850000972461A8650000109E /* UITableView+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850000962461A8650000109E /* UITableView+SwiftyTheme.swift */; };
+		850000992461AB5B0000109E /* UIProgressView+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850000982461AB5B0000109E /* UIProgressView+SwiftyTheme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +58,9 @@
 		8500008E246155600000109E /* dark_mode.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = dark_mode.txt; sourceTree = "<group>"; };
 		8500009024615EBD0000109E /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
 		850000922461634B0000109E /* NSObject+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+SwiftyTheme.swift"; sourceTree = "<group>"; };
+		85000094246171D90000109E /* CAShapeLayer+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CAShapeLayer+SwiftyTheme.swift"; sourceTree = "<group>"; };
+		850000962461A8650000109E /* UITableView+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+SwiftyTheme.swift"; sourceTree = "<group>"; };
+		850000982461AB5B0000109E /* UIProgressView+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIProgressView+SwiftyTheme.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,9 +116,12 @@
 				850000922461634B0000109E /* NSObject+SwiftyTheme.swift */,
 				85000080246127E20000109E /* UIView+SwiftyTheme.swift */,
 				8500008C24614F030000109E /* UILabel+SwiftyTheme.swift */,
-				850000822461285A0000109E /* CALayer+SwiftyTheme.swift */,
 				85000084246129310000109E /* UISwitch+SwiftyTheme.swift */,
 				850000862461294A0000109E /* UIButton+SwiftyTheme.swift */,
+				850000822461285A0000109E /* CALayer+SwiftyTheme.swift */,
+				85000094246171D90000109E /* CAShapeLayer+SwiftyTheme.swift */,
+				850000962461A8650000109E /* UITableView+SwiftyTheme.swift */,
+				850000982461AB5B0000109E /* UIProgressView+SwiftyTheme.swift */,
 				18E49AAE245996DF00EF7E64 /* UIColor+SwiftyTheme.swift */,
 				1804AE0C245AAD37003EB9E1 /* NSObject+SwiftyThemeSwizzle.h */,
 				1804AE0D245AAD37003EB9E1 /* NSObject+SwiftyThemeSwizzle.m */,
@@ -207,6 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				850000972461A8650000109E /* UITableView+SwiftyTheme.swift in Sources */,
 				85000081246127E20000109E /* UIView+SwiftyTheme.swift in Sources */,
 				8500009124615EBD0000109E /* NextViewController.swift in Sources */,
 				850000932461634B0000109E /* NSObject+SwiftyTheme.swift in Sources */,
@@ -216,10 +226,12 @@
 				18E49AB12459AD9200EF7E64 /* SwiftyTheme.swift in Sources */,
 				85000085246129310000109E /* UISwitch+SwiftyTheme.swift in Sources */,
 				850000832461285A0000109E /* CALayer+SwiftyTheme.swift in Sources */,
+				850000992461AB5B0000109E /* UIProgressView+SwiftyTheme.swift in Sources */,
 				1804AE09245AABC8003EB9E1 /* OCExampleViewController.m in Sources */,
 				181BF011245926C400080040 /* ViewController.swift in Sources */,
 				8500008D24614F030000109E /* UILabel+SwiftyTheme.swift in Sources */,
 				181BF00D245926C400080040 /* AppDelegate.swift in Sources */,
+				85000095246171D90000109E /* CAShapeLayer+SwiftyTheme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

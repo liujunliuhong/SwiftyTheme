@@ -16,6 +16,7 @@ internal struct SwiftyThemeKeys {
     struct Closure {
         static var themeChangeClosure_key = "com.yinhe.swiftyTheme.Closure.themeChangeClosure"
     }
+    
     struct UIView {
         static var backgroundColor_key = "com.yinhe.swiftyTheme.UIView.backgroundColor"
     }
@@ -31,6 +32,29 @@ internal struct SwiftyThemeKeys {
     struct UISwitch {
         static var onTintColor_key = "com.yinhe.swiftyTheme.UISwitch.onTintColor"
         static var thumbTintColor_key = "com.yinhe.swiftyTheme.UISwitch.thumbTintColor"
+    }
+    
+    struct CALayer {
+        static var backgroundColor_key = "com.yinhe.swiftyTheme.CALayer.backgroundColor"
+        static var borderColor_key = "com.yinhe.swiftyTheme.CALayer.borderColor"
+        static var shadowColor_key = "com.yinhe.swiftyTheme.CALayer.shadowColor"
+    }
+    
+    struct CAShapeLayer {
+        static var fillColor_key = "com.yinhe.swiftyTheme.CAShapeLayer.fillColor"
+        static var strokeColor_key = "com.yinhe.swiftyTheme.CAShapeLayer.strokeColor"
+    }
+    
+    struct UITableView {
+        static var separatorColor_key = "com.yinhe.swiftyTheme.UITableView.separatorColor"
+        static var sectionIndexColor_key = "com.yinhe.swiftyTheme.UITableView.sectionIndexColor"
+        static var sectionIndexBackgroundColor_key = "com.yinhe.swiftyTheme.UITableView.sectionIndexBackgroundColor"
+        static var sectionIndexTrackingBackgroundColor_key = "com.yinhe.swiftyTheme.UITableView.sectionIndexTrackingBackgroundColor"
+    }
+    
+    struct UIProgressView {
+        static var progressTintColor_key = "com.yinhe.swiftyTheme.UIProgressView.progressTintColor"
+        static var trackTintColor_key = "com.yinhe.swiftyTheme.UIProgressView.trackTintColor"
     }
 }
 
@@ -54,10 +78,14 @@ internal struct SwiftyThemeKeys {
     @objc private(set) public var currentThemeInfo: [String: String] = [:]
     
     /// current theme tag
-    @objc private(set) public var currentThemeTag: String = "" {
-        didSet {
-            UserDefaults.standard.set(currentThemeTag, forKey: SwifyThemeCurrentTag)
+    @objc private(set) public var currentThemeTag: String {
+        set {
+            UserDefaults.standard.set(newValue, forKey: SwifyThemeCurrentTag)
             UserDefaults.standard.synchronize()
+        }
+        get {
+            let value = UserDefaults.standard.object(forKey: SwifyThemeCurrentTag) as? String
+            return value ?? ""
         }
     }
     
@@ -90,6 +118,12 @@ extension SwiftyTheme {
             if let uiswitch = object as? UISwitch {
                 self.updateUISwitchTheme(uiswitch: uiswitch)
             }
+            if let shapeLayer = object as? CAShapeLayer {
+                self.updateCAShapeLayerTheme(shapeLayer: shapeLayer)
+            }
+            if let layer = object as? CALayer {
+                self.updateCALayerTheme(layer: layer)
+            }
             self.updateNSObjectTheme(object: object)
         }
     }
@@ -104,10 +138,12 @@ extension SwiftyTheme {
     private func updateUIViewTheme(view: UIView) {
         do {
             // backgroundColor
-            let key = objc_getAssociatedObject(view, &SwiftyThemeKeys.UIView.backgroundColor_key) as? String
-            let value = SwiftyTheme.shared.getValue(key: key)
-            view.backgroundColor = SwiftyTheme.shared.getColor(key: value)
+            if let key = objc_getAssociatedObject(view, &SwiftyThemeKeys.UIView.backgroundColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                view.backgroundColor = SwiftyTheme.shared.getColor(key: value)
+            }
         }
+        
         do {
             
         }
@@ -115,37 +151,114 @@ extension SwiftyTheme {
     private func updateUILabelTheme(label: UILabel) {
         do {
             // textColor
-            let key = objc_getAssociatedObject(label, &SwiftyThemeKeys.UILabel.textColor_key) as? String
-            let value = SwiftyTheme.shared.getValue(key: key)
-            label.textColor = SwiftyTheme.shared.getColor(key: value)
+            if let key = objc_getAssociatedObject(label, &SwiftyThemeKeys.UILabel.textColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                label.textColor = SwiftyTheme.shared.getColor(key: value)
+            }
         }
         do {
             
         }
     }
+    
     private func updateUISwitchTheme(uiswitch: UISwitch) {
         do {
             // onTintColor
-            let key = objc_getAssociatedObject(uiswitch, &SwiftyThemeKeys.UISwitch.onTintColor_key) as? String
-            let value = SwiftyTheme.shared.getValue(key: key)
-            uiswitch.onTintColor = SwiftyTheme.shared.getColor(key: value)
+            if let key = objc_getAssociatedObject(uiswitch, &SwiftyThemeKeys.UISwitch.onTintColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                uiswitch.onTintColor = SwiftyTheme.shared.getColor(key: value)
+            }
         }
         do {
             // thumbTintColor
-            let key = objc_getAssociatedObject(uiswitch, &SwiftyThemeKeys.UISwitch.thumbTintColor_key) as? String
-            let value = SwiftyTheme.shared.getValue(key: key)
-            uiswitch.thumbTintColor = SwiftyTheme.shared.getColor(key: value)
+            if let key = objc_getAssociatedObject(uiswitch, &SwiftyThemeKeys.UISwitch.thumbTintColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                uiswitch.thumbTintColor = SwiftyTheme.shared.getColor(key: value)
+            }
         }
     }
+    
     private func updateUIButtonTheme(button: UIButton) {
         do {
             // titleColor
-            let configs = objc_getAssociatedObject(button, &SwiftyThemeKeys.UIButton.titleColor_key) as? [SwiftyThemeButtonConfig] ?? []
-            
-            for (_, config) in configs.enumerated() {
-                let color = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: config.colorKey))
-                let state = config.state
-                button.setTitleColor(color, for: state)
+            if let configs = objc_getAssociatedObject(button, &SwiftyThemeKeys.UIButton.titleColor_key) as? [SwiftyThemeButtonConfig],
+                configs.count > 0 {
+                for (_, config) in configs.enumerated() {
+                    let color = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: config.colorKey))
+                    let state = config.state
+                    button.setTitleColor(color, for: state)
+                }
+            }
+        }
+    }
+    
+    private func updateCALayerTheme(layer: CALayer) {
+        do {
+            // backgroundColor
+            if let key = objc_getAssociatedObject(layer, &SwiftyThemeKeys.CALayer.backgroundColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                layer.backgroundColor = SwiftyTheme.shared.getColor(key: value)?.cgColor
+            }
+        }
+        do {
+            // borderColor
+            if let key = objc_getAssociatedObject(layer, &SwiftyThemeKeys.CALayer.borderColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                layer.borderColor = SwiftyTheme.shared.getColor(key: value)?.cgColor
+            }
+        }
+        do {
+            // shadowColor
+            if let key = objc_getAssociatedObject(layer, &SwiftyThemeKeys.CALayer.shadowColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                layer.shadowColor = SwiftyTheme.shared.getColor(key: value)?.cgColor
+            }
+        }
+    }
+    
+    private func updateCAShapeLayerTheme(shapeLayer: CAShapeLayer) {
+        do {
+            // backgroundColor
+            if let key = objc_getAssociatedObject(shapeLayer, &SwiftyThemeKeys.CAShapeLayer.fillColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                shapeLayer.fillColor = SwiftyTheme.shared.getColor(key: value)?.cgColor
+            }
+        }
+        do {
+            // borderColor
+            if let key = objc_getAssociatedObject(shapeLayer, &SwiftyThemeKeys.CAShapeLayer.strokeColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                shapeLayer.strokeColor = SwiftyTheme.shared.getColor(key: value)?.cgColor
+            }
+        }
+    }
+    private func updateUITableViewTheme(tableView: UITableView) {
+        do {
+            // separatorColor
+            if let key = objc_getAssociatedObject(tableView, &SwiftyThemeKeys.UITableView.separatorColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                tableView.separatorColor = SwiftyTheme.shared.getColor(key: value)
+            }
+        }
+        do {
+            // sectionIndexColor
+            if let key = objc_getAssociatedObject(tableView, &SwiftyThemeKeys.UITableView.sectionIndexColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                tableView.sectionIndexColor = SwiftyTheme.shared.getColor(key: value)
+            }
+        }
+        do {
+            // sectionIndexBackgroundColor
+            if let key = objc_getAssociatedObject(tableView, &SwiftyThemeKeys.UITableView.sectionIndexBackgroundColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                tableView.sectionIndexBackgroundColor = SwiftyTheme.shared.getColor(key: value)
+            }
+        }
+        do {
+            // sectionIndexTrackingBackgroundColor
+            if let key = objc_getAssociatedObject(tableView, &SwiftyThemeKeys.UITableView.sectionIndexTrackingBackgroundColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                tableView.sectionIndexTrackingBackgroundColor = SwiftyTheme.shared.getColor(key: value)
             }
         }
     }

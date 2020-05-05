@@ -24,9 +24,10 @@ import UIKit
 }
 
 extension UIButton {
-    @objc public func st_setTitleColor(configs: [SwiftyThemeButtonConfig]) {
+    @discardableResult
+    @objc public func st_setTitleColor(configs: [SwiftyThemeButtonConfig]) -> Self {
         if configs.count <= 0 {
-            return
+            return self
         }
         
         for (_, config) in configs.enumerated() {
@@ -37,5 +38,6 @@ extension UIButton {
         
         objc_setAssociatedObject(self, &SwiftyThemeKeys.UIButton.titleColor_key, configs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         SwiftyTheme.shared.hashTable.add(self)
+        return self
     }
 }
