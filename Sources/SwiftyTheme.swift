@@ -9,160 +9,211 @@
 import Foundation
 import UIKit
 
-
-//protocol SwiftyThemeCompatible: AnyObject { }
-//
-//extension SwiftyThemeCompatible {
-//    var theme: SwiftyThemeWrapper<Self> {
-//        get {
-//            return SwiftyThemeWrapper<Self>(base: self)
-//        }
-//        set {
-//            fatalError()
-//        }
-//    }
-//}
-//
-//
-//extension UIView: SwiftyThemeCompatible {
-//
-//}
-//
-//extension CALayer: SwiftyThemeCompatible {
-//
-//}
-//
-//extension UIBarItem: SwiftyThemeCompatible {
-//
-//}
-//
-//
-//
-//
-//
-//
-//
-//struct SwiftyThemeWrapper<Base> {
-//    let base: Base
-//    init(base: Base) {
-//        self.base = base
-//    }
-//}
-//
+fileprivate let SwifyThemeCurrentTag: String = "SwifyThemeCurrentTag"
 
 
-
-
-//
-//
-//extension SwiftyThemeWrapper where Base: UIView {
-//
-//}
-
-
-//extension UIView {
-//    public override var st_theme: SwiftyTheme {
-//        return super.st_theme
-//    }
-//}
-//
-//
-//extension UILabel {
-//    public override var st_theme: SwiftyTheme {
-//        return super.st_theme
-//    }
-//}
-
-
-
-
-
-public class SwiftyTheme: NSObject {
+internal struct SwiftyThemeKeys {
+    struct Closure {
+        static var themeChangeClosure_key = "com.yinhe.swiftyTheme.Closure.themeChangeClosure"
+    }
+    struct UIView {
+        static var backgroundColor_key = "com.yinhe.swiftyTheme.UIView.backgroundColor"
+    }
     
-    lazy var hashTable: NSHashTable<NSObject> = {
+    struct UILabel {
+        static var textColor_key = "com.yinhe.swiftyTheme.UILabel.textColor"
+    }
+    
+    struct UIButton {
+        static var titleColor_key = "com.yinhe.swiftyTheme.UIButton.titleColor"
+        static var titleColorState_key = "com.yinhe.swiftyTheme.UIButton.titleColorState"
+    }
+   
+    struct UISwitch {
+        static var onTintColor_key = "com.yinhe.swiftyTheme.UISwitch.onTintColor"
+        static var thumbTintColor_key = "com.yinhe.swiftyTheme.UISwitch.thumbTintColor"
+    }
+}
+
+
+
+@objc public class SwiftyTheme: NSObject {
+    
+    /// shared
+    @objc public static let shared = SwiftyTheme()
+    
+    @objc public static let SwifyThemeChangeNotification: String = "SwifyThemeChangeNotification"
+    
+    /// documentpatch
+    @objc public let documentpatch = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last
+    
+    /// key: themeTag       value: themePath
+    @objc private(set) public var tagInfo: [String: String] = [:]
+    
+    /// key: key    value: value
+    @objc private(set) public var currentThemeInfo: [String: String] = [:]
+    
+    /// current theme tag
+    @objc private(set) public var currentThemeTag: String = "" {
+        didSet {
+            UserDefaults.standard.set(currentThemeTag, forKey: SwifyThemeCurrentTag)
+            UserDefaults.standard.synchronize()
+        }
+    }
+    
+    
+    internal lazy var hashTable: NSHashTable<NSObject> = {
         let hashTable = NSHashTable<NSObject>(options: [NSPointerFunctions.Options.weakMemory])
         return hashTable
     }()
     
-    public override init() {
+    
+    private override init() {
         super.init()
         
-        
-        for (index, object) in self.hashTable.allObjects.enumerated() {
-
-            if let view = object as? UIView {
-                
-            }
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTheme), name: NSNotification.Name(SwiftyTheme.SwifyThemeChangeNotification), object: nil)
     }
 }
-
-let ss = "st_xxx_UIView"
 
 extension SwiftyTheme {
-    func backgroundColor(key: String) -> Self {
-        
-        return self
-    }
-}
-
-
-
-
-extension UIColor {
-    func color(key: String) -> UIColor? {
-        return nil
-    }
-}
-
-
-
-
-
-
-
-
-
-extension NSObject {
-    internal struct Keys {
-        static let themeKey = "com.yinhe.swiftyTheme.key"
-        static let isThemeKey = "com.yinhe.isSwiftyTheme.key"
+    @objc private func updateTheme() {
+        for (_, object) in self.hashTable.allObjects.enumerated() {
+            if let view = object as? UIView {
+                self.updateUIViewTheme(view: view)
+            }
+            if let label = object as? UILabel {
+                self.updateUILabelTheme(label: label)
+            }
+            if let uiswitch = object as? UISwitch {
+                self.updateUISwitchTheme(uiswitch: uiswitch)
+            }
+            self.updateNSObjectTheme(object: object)
+        }
     }
     
-    @objc public var st_theme: SwiftyTheme {
-        var theme = objc_getAssociatedObject(self, Keys.themeKey) as? SwiftyTheme
-        
-        if theme == nil {
-            theme = SwiftyTheme()
-            objc_setAssociatedObject(self, Keys.themeKey, theme!, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    private func updateNSObjectTheme(object: NSObject) {
+        do {
+            let closure = objc_getAssociatedObject(object, &SwiftyThemeKeys.Closure.themeChangeClosure_key) as? SwiftyThemeChangeClosure
+            closure?()
+        }
+    }
+    
+    private func updateUIViewTheme(view: UIView) {
+        do {
+            // backgroundColor
+            let key = objc_getAssociatedObject(view, &SwiftyThemeKeys.UIView.backgroundColor_key) as? String
+            let value = SwiftyTheme.shared.getValue(key: key)
+            view.backgroundColor = SwiftyTheme.shared.getColor(key: value)
+        }
+        do {
             
-            theme!.isTheme = true
+        }
+    }
+    private func updateUILabelTheme(label: UILabel) {
+        do {
+            // textColor
+            let key = objc_getAssociatedObject(label, &SwiftyThemeKeys.UILabel.textColor_key) as? String
+            let value = SwiftyTheme.shared.getValue(key: key)
+            label.textColor = SwiftyTheme.shared.getColor(key: value)
+        }
+        do {
+            
+        }
+    }
+    private func updateUISwitchTheme(uiswitch: UISwitch) {
+        do {
+            // onTintColor
+            let key = objc_getAssociatedObject(uiswitch, &SwiftyThemeKeys.UISwitch.onTintColor_key) as? String
+            let value = SwiftyTheme.shared.getValue(key: key)
+            uiswitch.onTintColor = SwiftyTheme.shared.getColor(key: value)
+        }
+        do {
+            // thumbTintColor
+            let key = objc_getAssociatedObject(uiswitch, &SwiftyThemeKeys.UISwitch.thumbTintColor_key) as? String
+            let value = SwiftyTheme.shared.getValue(key: key)
+            uiswitch.thumbTintColor = SwiftyTheme.shared.getColor(key: value)
+        }
+    }
+    
+}
+
+extension SwiftyTheme {
+    @objc public func addThemeConfiguration(bundlePath: String?, sandBoxRelativePath: String?, themeTag: String) {
+        
+        if let bundlePath = bundlePath {
+            SwiftyTheme.shared.tagInfo[themeTag] = bundlePath
         }
         
-        return theme!
-    }
-    
-    internal var isTheme: Bool {
-        get {
-            let value = objc_getAssociatedObject(self, Keys.isThemeKey) as? NSNumber
-            return value?.boolValue ?? false
-        }
-        set {
-            objc_setAssociatedObject(self, Keys.isThemeKey, NSNumber(value: newValue), .OBJC_ASSOCIATION_ASSIGN)
+        if let documentpatch = SwiftyTheme.shared.documentpatch,
+            let sandBoxRelativePath = sandBoxRelativePath {
+            let fullPath = documentpatch + "/" + sandBoxRelativePath
+            SwiftyTheme.shared.tagInfo[themeTag] = fullPath
         }
     }
     
-    
-    @objc private dynamic func st_dealloc() {
-        if self.isTheme {
-            objc_setAssociatedObject(self, Keys.themeKey, nil, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-            objc_setAssociatedObject(self, Keys.isThemeKey, nil, .OBJC_ASSOCIATION_ASSIGN)
+    @objc public func switchToTheme(tag: String?) {
+        guard let tag = tag else {
+            print("tag is empty.")
+            return
         }
-        self.st_dealloc()
+        
+        guard SwiftyTheme.shared.tagInfo.keys.contains(tag) else {
+            print("tag does not exist.")
+            return
+        }
+        
+        let themePath = SwiftyTheme.shared.tagInfo[tag]
+        
+//        if let jsonString = try? String(contentsOfFile: themePath!, encoding: .utf8),
+//            let jsonData = jsonString.data(using: .utf8),
+//            let themeInfo = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as? [String: String]{
+//            let dic = NSDictionary(contentsOf: URL(fileURLWithPath: themePath!)) as! [String: String]
+//            SwiftyTheme.shared.currentThemeInfo = themeInfo
+//            SwiftyTheme.shared.currentThemeTag = tag
+//
+//            NotificationCenter.default.post(name: NSNotification.Name(SwiftyTheme.SwifyThemeChangeNotification), object: nil)
+//        }
+        
+        if let themeInfo = NSDictionary(contentsOf: URL(fileURLWithPath: themePath!)) as? [String: String] {
+            SwiftyTheme.shared.currentThemeInfo = themeInfo
+            SwiftyTheme.shared.currentThemeTag = tag
+            
+            NotificationCenter.default.post(name: NSNotification.Name(SwiftyTheme.SwifyThemeChangeNotification), object: nil)
+        }
     }
     
     
-    func <#name#>(<#parameters#>) -> <#return type#> {
-        <#function body#>
+}
+
+extension SwiftyTheme {
+    
+    /// get value with key
+    /// - Parameter key: key
+    @objc public func getValue(key: String?) -> String? {
+        var value: String? = nil
+        guard let key = key else {
+            return value
+        }
+        value = SwiftyTheme.shared.currentThemeInfo[key]
+        if value == nil {
+            if let themePath = SwiftyTheme.shared.tagInfo[SwiftyTheme.shared.currentThemeTag],
+                let themeInfo = NSDictionary(contentsOf: URL(fileURLWithPath: themePath)) as? [String: String] {
+                value = themeInfo[key]
+            }
+            //            if let themePath = SwiftyTheme.shared.tagInfo[SwiftyTheme.shared.currentThemeTag],
+            //                let jsonString = try? String(contentsOfFile: themePath, encoding: .utf8),
+            //                let jsonData = jsonString.data(using: .utf8),
+            //                let themeInfo = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as? [String: String]{
+            //                value = themeInfo[key]
+            //            }
+        }
+        return value
+    }
+    
+    /// get color with key
+    /// - Parameter key: key
+    @objc public func getColor(key: String?) -> UIColor? {
+        guard let key = key else { return nil }
+        return UIColor.st_color(string: key)
     }
 }

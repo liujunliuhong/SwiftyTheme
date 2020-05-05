@@ -69,7 +69,7 @@ extension UIColor {
                 alpha = 1.0
                 red = UIColor.color(string: string, start: 0, length: 2)
                 green = UIColor.color(string: string, start: 2, length: 2)
-                blue = UIColor.color(string: string, start: 3, length: 2)
+                blue = UIColor.color(string: string, start: 4, length: 2)
             case 8: // AARRGGBB  #ffffffff
                 alpha = UIColor.color(string: string, start: 0, length: 2)
                 red = UIColor.color(string: string, start: 2, length: 2)

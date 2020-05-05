@@ -1,0 +1,8 @@
+
+
+"uiview_backgroundColor" = "#2E4653";
+
+"uiswitch_onTintColor" = "#1DAEF9";
+
+"label_textColor" = "#FF00FF";
+"label_backgroundColor" = "#0000FF";

@@ -8,36 +8,40 @@
 
 import UIKit
 
+
 class ViewController: UIViewController {
 
-    
-    lazy var testLabel: UILabel = {
-        let testLabel = UILabel()
-        return testLabel
+    lazy var uiSwitch: UISwitch = {
+        let uiSwitch = UISwitch()
+        return uiSwitch
     }()
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            print("\(SwiftyTheme.shared.hashTable)")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.white
+        self.view.st_backgroundColor(key: "uiview_backgroundColor")
         
-        
-        
-//        guard let path = Bundle.main.path(forResource: "white_mode", ofType: "txt") else {
-//            return
-//        }
-//
-//
-//        let dic = NSDictionary(contentsOf: URL(fileURLWithPath: path))
-//
-//        print("\(dic)")
-//
-        self.view.st_theme
-        
+   
+        self.uiSwitch.center = CGPoint(x: 50, y: UIApplication.shared.statusBarFrame.height + 44.0 + 50)
+        self.uiSwitch.st_onTintColor(key: "uiswitch_onTintColor")
+        self.view.addSubview(self.uiSwitch)
         
     }
-
-
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let vc = NextViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
+
+
 
 
 /*

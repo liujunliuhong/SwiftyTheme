@@ -9,17 +9,24 @@
 /* Begin PBXBuildFile section */
 		1804AE09245AABC8003EB9E1 /* OCExampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804AE08245AABC8003EB9E1 /* OCExampleViewController.m */; };
 		1804AE0E245AAD37003EB9E1 /* NSObject+SwiftyThemeSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 1804AE0D245AAD37003EB9E1 /* NSObject+SwiftyThemeSwizzle.m */; };
-		1804AE10245AB008003EB9E1 /* SwiftyThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1804AE0F245AB008003EB9E1 /* SwiftyThemeManager.swift */; };
 		181BF00D245926C400080040 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181BF00C245926C400080040 /* AppDelegate.swift */; };
 		181BF011245926C400080040 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181BF010245926C400080040 /* ViewController.swift */; };
 		181BF014245926C400080040 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 181BF012245926C400080040 /* Main.storyboard */; };
 		181BF016245926C600080040 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 181BF015245926C600080040 /* Assets.xcassets */; };
 		181BF019245926C600080040 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 181BF017245926C600080040 /* LaunchScreen.storyboard */; };
 		18E49AA724592BFB00EF7E64 /* ssss.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 18E49AA624592BFB00EF7E64 /* ssss.stringsdict */; };
-		18E49AAB24592C5900EF7E64 /* white_mode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 18E49AAA24592C5900EF7E64 /* white_mode.txt */; };
 		18E49AAD2459962B00EF7E64 /* theme_white.json in Resources */ = {isa = PBXBuildFile; fileRef = 18E49AAC2459962B00EF7E64 /* theme_white.json */; };
 		18E49AAF245996DF00EF7E64 /* UIColor+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E49AAE245996DF00EF7E64 /* UIColor+SwiftyTheme.swift */; };
 		18E49AB12459AD9200EF7E64 /* SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E49AB02459AD9200EF7E64 /* SwiftyTheme.swift */; };
+		85000081246127E20000109E /* UIView+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85000080246127E20000109E /* UIView+SwiftyTheme.swift */; };
+		850000832461285A0000109E /* CALayer+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850000822461285A0000109E /* CALayer+SwiftyTheme.swift */; };
+		85000085246129310000109E /* UISwitch+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85000084246129310000109E /* UISwitch+SwiftyTheme.swift */; };
+		850000872461294A0000109E /* UIButton+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850000862461294A0000109E /* UIButton+SwiftyTheme.swift */; };
+		85000088246145E50000109E /* white_mode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8500008A246145E50000109E /* white_mode.txt */; };
+		8500008D24614F030000109E /* UILabel+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8500008C24614F030000109E /* UILabel+SwiftyTheme.swift */; };
+		8500008F246155600000109E /* dark_mode.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8500008E246155600000109E /* dark_mode.txt */; };
+		8500009124615EBD0000109E /* NextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8500009024615EBD0000109E /* NextViewController.swift */; };
+		850000932461634B0000109E /* NSObject+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850000922461634B0000109E /* NSObject+SwiftyTheme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +35,6 @@
 		1804AE08245AABC8003EB9E1 /* OCExampleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OCExampleViewController.m; sourceTree = "<group>"; };
 		1804AE0C245AAD37003EB9E1 /* NSObject+SwiftyThemeSwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+SwiftyThemeSwizzle.h"; sourceTree = "<group>"; };
 		1804AE0D245AAD37003EB9E1 /* NSObject+SwiftyThemeSwizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SwiftyThemeSwizzle.m"; sourceTree = "<group>"; };
-		1804AE0F245AB008003EB9E1 /* SwiftyThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyThemeManager.swift; sourceTree = "<group>"; };
 		181BF009245926C400080040 /* SwiftyTheme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyTheme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		181BF00C245926C400080040 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		181BF010245926C400080040 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,10 +43,18 @@
 		181BF018245926C600080040 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		181BF01A245926C600080040 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18E49AA624592BFB00EF7E64 /* ssss.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = ssss.stringsdict; sourceTree = "<group>"; };
-		18E49AAA24592C5900EF7E64 /* white_mode.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = white_mode.txt; sourceTree = "<group>"; };
 		18E49AAC2459962B00EF7E64 /* theme_white.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = theme_white.json; sourceTree = "<group>"; };
 		18E49AAE245996DF00EF7E64 /* UIColor+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+SwiftyTheme.swift"; sourceTree = "<group>"; };
 		18E49AB02459AD9200EF7E64 /* SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyTheme.swift; sourceTree = "<group>"; };
+		85000080246127E20000109E /* UIView+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+SwiftyTheme.swift"; sourceTree = "<group>"; };
+		850000822461285A0000109E /* CALayer+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+SwiftyTheme.swift"; sourceTree = "<group>"; };
+		85000084246129310000109E /* UISwitch+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISwitch+SwiftyTheme.swift"; sourceTree = "<group>"; };
+		850000862461294A0000109E /* UIButton+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+SwiftyTheme.swift"; sourceTree = "<group>"; };
+		85000089246145E50000109E /* Base */ = {isa = PBXFileReference; lastKnownFileType = text; name = Base; path = Base.lproj/white_mode.txt; sourceTree = "<group>"; };
+		8500008C24614F030000109E /* UILabel+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+SwiftyTheme.swift"; sourceTree = "<group>"; };
+		8500008E246155600000109E /* dark_mode.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = dark_mode.txt; sourceTree = "<group>"; };
+		8500009024615EBD0000109E /* NextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextViewController.swift; sourceTree = "<group>"; };
+		850000922461634B0000109E /* NSObject+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+SwiftyTheme.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +90,7 @@
 				181BF0202459275C00080040 /* Sources */,
 				181BF00C245926C400080040 /* AppDelegate.swift */,
 				181BF010245926C400080040 /* ViewController.swift */,
+				8500009024615EBD0000109E /* NextViewController.swift */,
 				1804AE07245AABC8003EB9E1 /* OCExampleViewController.h */,
 				1804AE08245AABC8003EB9E1 /* OCExampleViewController.m */,
 				18E49AA524592BDA00EF7E64 /* Resources */,
@@ -91,11 +106,16 @@
 		181BF0202459275C00080040 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				1804AE0F245AB008003EB9E1 /* SwiftyThemeManager.swift */,
 				18E49AB02459AD9200EF7E64 /* SwiftyTheme.swift */,
+				850000922461634B0000109E /* NSObject+SwiftyTheme.swift */,
+				85000080246127E20000109E /* UIView+SwiftyTheme.swift */,
+				8500008C24614F030000109E /* UILabel+SwiftyTheme.swift */,
+				850000822461285A0000109E /* CALayer+SwiftyTheme.swift */,
+				85000084246129310000109E /* UISwitch+SwiftyTheme.swift */,
+				850000862461294A0000109E /* UIButton+SwiftyTheme.swift */,
+				18E49AAE245996DF00EF7E64 /* UIColor+SwiftyTheme.swift */,
 				1804AE0C245AAD37003EB9E1 /* NSObject+SwiftyThemeSwizzle.h */,
 				1804AE0D245AAD37003EB9E1 /* NSObject+SwiftyThemeSwizzle.m */,
-				18E49AAE245996DF00EF7E64 /* UIColor+SwiftyTheme.swift */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -104,7 +124,8 @@
 			isa = PBXGroup;
 			children = (
 				18E49AA624592BFB00EF7E64 /* ssss.stringsdict */,
-				18E49AAA24592C5900EF7E64 /* white_mode.txt */,
+				8500008E246155600000109E /* dark_mode.txt */,
+				8500008A246145E50000109E /* white_mode.txt */,
 				18E49AAC2459962B00EF7E64 /* theme_white.json */,
 			);
 			path = Resources;
@@ -169,8 +190,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				18E49AAB24592C5900EF7E64 /* white_mode.txt in Resources */,
+				85000088246145E50000109E /* white_mode.txt in Resources */,
 				18E49AAD2459962B00EF7E64 /* theme_white.json in Resources */,
+				8500008F246155600000109E /* dark_mode.txt in Resources */,
 				18E49AA724592BFB00EF7E64 /* ssss.stringsdict in Resources */,
 				181BF019245926C600080040 /* LaunchScreen.storyboard in Resources */,
 				181BF016245926C600080040 /* Assets.xcassets in Resources */,
@@ -185,12 +207,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1804AE10245AB008003EB9E1 /* SwiftyThemeManager.swift in Sources */,
+				85000081246127E20000109E /* UIView+SwiftyTheme.swift in Sources */,
+				8500009124615EBD0000109E /* NextViewController.swift in Sources */,
+				850000932461634B0000109E /* NSObject+SwiftyTheme.swift in Sources */,
+				850000872461294A0000109E /* UIButton+SwiftyTheme.swift in Sources */,
 				1804AE0E245AAD37003EB9E1 /* NSObject+SwiftyThemeSwizzle.m in Sources */,
 				18E49AAF245996DF00EF7E64 /* UIColor+SwiftyTheme.swift in Sources */,
 				18E49AB12459AD9200EF7E64 /* SwiftyTheme.swift in Sources */,
+				85000085246129310000109E /* UISwitch+SwiftyTheme.swift in Sources */,
+				850000832461285A0000109E /* CALayer+SwiftyTheme.swift in Sources */,
 				1804AE09245AABC8003EB9E1 /* OCExampleViewController.m in Sources */,
 				181BF011245926C400080040 /* ViewController.swift in Sources */,
+				8500008D24614F030000109E /* UILabel+SwiftyTheme.swift in Sources */,
 				181BF00D245926C400080040 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,6 +240,14 @@
 				181BF018245926C600080040 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		8500008A246145E50000109E /* white_mode.txt */ = {
+			isa = PBXVariantGroup;
+			children = (
+				85000089246145E50000109E /* Base */,
+			);
+			name = white_mode.txt;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
