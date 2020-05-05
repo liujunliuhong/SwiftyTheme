@@ -8,4 +8,4 @@
 
 
 "button_title_color" = "#D2691E";
-"button_title_highlighted_color" = "#F0FFF0";
+"button_title_highlighted_color" = "#0000FF";

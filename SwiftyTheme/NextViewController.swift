@@ -31,10 +31,9 @@ class NextViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "切换", style: .plain, target: self, action: #selector(changeTheme))
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(changeTheme))
-        
-        self.textLabel.center = self.view.center
+        self.textLabel.center = CGPoint(x: self.view.center.x, y: UIApplication.shared.statusBarFrame.height + 44.0 + 100)
         self.textLabel.bounds = CGRect(x: 0, y: 0, width: 200, height: 100)
         self.textLabel.st_textColor(key: "label_textColor")
         self.textLabel.st_backgroundColor(key: "label_backgroundColor")

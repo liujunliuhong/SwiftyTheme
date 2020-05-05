@@ -11,6 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @interface NSObject (SwiftyThemeSwizzle)
+// This method is not used for the time being and may be used in the future.
 + (BOOL)st_swizzleInstanceMethod:(SEL)selector1 to:(SEL)selector2;
 @end
 NS_ASSUME_NONNULL_END
