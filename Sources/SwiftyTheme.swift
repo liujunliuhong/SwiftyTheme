@@ -26,9 +26,8 @@ internal struct SwiftyThemeKeys {
     
     struct UIButton {
         static var titleColor_key = "com.yinhe.swiftyTheme.UIButton.titleColor"
-        static var titleColorState_key = "com.yinhe.swiftyTheme.UIButton.titleColorState"
     }
-   
+    
     struct UISwitch {
         static var onTintColor_key = "com.yinhe.swiftyTheme.UISwitch.onTintColor"
         static var thumbTintColor_key = "com.yinhe.swiftyTheme.UISwitch.thumbTintColor"
@@ -42,6 +41,7 @@ internal struct SwiftyThemeKeys {
     /// shared
     @objc public static let shared = SwiftyTheme()
     
+    /// theme change notification name
     @objc public static let SwifyThemeChangeNotification: String = "SwifyThemeChangeNotification"
     
     /// documentpatch
@@ -83,6 +83,9 @@ extension SwiftyTheme {
             }
             if let label = object as? UILabel {
                 self.updateUILabelTheme(label: label)
+            }
+            if let button = object as? UIButton {
+                self.updateUIButtonTheme(button: button)
             }
             if let uiswitch = object as? UISwitch {
                 self.updateUISwitchTheme(uiswitch: uiswitch)
@@ -134,7 +137,18 @@ extension SwiftyTheme {
             uiswitch.thumbTintColor = SwiftyTheme.shared.getColor(key: value)
         }
     }
-    
+    private func updateUIButtonTheme(button: UIButton) {
+        do {
+            // titleColor
+            let configs = objc_getAssociatedObject(button, &SwiftyThemeKeys.UIButton.titleColor_key) as? [SwiftyThemeButtonConfig] ?? []
+            
+            for (_, config) in configs.enumerated() {
+                let color = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: config.colorKey))
+                let state = config.state
+                button.setTitleColor(color, for: state)
+            }
+        }
+    }
 }
 
 extension SwiftyTheme {
@@ -163,17 +177,17 @@ extension SwiftyTheme {
         }
         
         let themePath = SwiftyTheme.shared.tagInfo[tag]
-        
-//        if let jsonString = try? String(contentsOfFile: themePath!, encoding: .utf8),
-//            let jsonData = jsonString.data(using: .utf8),
-//            let themeInfo = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as? [String: String]{
-//            let dic = NSDictionary(contentsOf: URL(fileURLWithPath: themePath!)) as! [String: String]
-//            SwiftyTheme.shared.currentThemeInfo = themeInfo
-//            SwiftyTheme.shared.currentThemeTag = tag
-//
-//            NotificationCenter.default.post(name: NSNotification.Name(SwiftyTheme.SwifyThemeChangeNotification), object: nil)
-//        }
-        
+        /*
+         if let jsonString = try? String(contentsOfFile: themePath!, encoding: .utf8),
+         let jsonData = jsonString.data(using: .utf8),
+         let themeInfo = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as? [String: String]{
+         let dic = NSDictionary(contentsOf: URL(fileURLWithPath: themePath!)) as! [String: String]
+         SwiftyTheme.shared.currentThemeInfo = themeInfo
+         SwiftyTheme.shared.currentThemeTag = tag
+         
+         NotificationCenter.default.post(name: NSNotification.Name(SwiftyTheme.SwifyThemeChangeNotification), object: nil)
+         }
+         */
         if let themeInfo = NSDictionary(contentsOf: URL(fileURLWithPath: themePath!)) as? [String: String] {
             SwiftyTheme.shared.currentThemeInfo = themeInfo
             SwiftyTheme.shared.currentThemeTag = tag
@@ -200,12 +214,14 @@ extension SwiftyTheme {
                 let themeInfo = NSDictionary(contentsOf: URL(fileURLWithPath: themePath)) as? [String: String] {
                 value = themeInfo[key]
             }
-            //            if let themePath = SwiftyTheme.shared.tagInfo[SwiftyTheme.shared.currentThemeTag],
-            //                let jsonString = try? String(contentsOfFile: themePath, encoding: .utf8),
-            //                let jsonData = jsonString.data(using: .utf8),
-            //                let themeInfo = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as? [String: String]{
-            //                value = themeInfo[key]
-            //            }
+            /*
+             if let themePath = SwiftyTheme.shared.tagInfo[SwiftyTheme.shared.currentThemeTag],
+             let jsonString = try? String(contentsOfFile: themePath, encoding: .utf8),
+             let jsonData = jsonString.data(using: .utf8),
+             let themeInfo = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as? [String: String]{
+             value = themeInfo[key]
+             }
+             */
         }
         return value
     }

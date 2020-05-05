@@ -6,3 +6,6 @@
 
 "label_textColor" = "#FF00FF";
 "label_backgroundColor" = "#0000FF";
+
+"button_title_color" = "#006400";
+"button_title_highlighted_color" = "#FF0000";

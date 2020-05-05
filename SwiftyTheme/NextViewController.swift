@@ -17,8 +17,15 @@ class NextViewController: UIViewController {
     private lazy var textLabel: UILabel = {
         let textLabel = UILabel()
         textLabel.textAlignment = .center
+        textLabel.text = "UILabel"
         textLabel.font = UIFont.boldSystemFont(ofSize: 20)
         return textLabel
+    }()
+    
+    private lazy var button: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Button", for: .normal)
+        return button
     }()
     
     override func viewDidLoad() {
@@ -29,18 +36,37 @@ class NextViewController: UIViewController {
         
         self.textLabel.center = self.view.center
         self.textLabel.bounds = CGRect(x: 0, y: 0, width: 200, height: 100)
-        self.textLabel.text = "哈哈哈哈"
-        self.view.addSubview(self.textLabel)
-        
         self.textLabel.st_textColor(key: "label_textColor")
         self.textLabel.st_backgroundColor(key: "label_backgroundColor")
         self.textLabel.st_themeChangeClosure = {
             print("11111")
         }
+        self.view.addSubview(self.textLabel)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            print("\(SwiftyTheme.shared.hashTable)")
-        }
+        
+        
+        self.button.center = CGPoint(x: self.view.center.x, y: self.textLabel.center.y + 150)
+        self.button.bounds = CGRect(x: 0, y: 0, width: 100, height: 45)
+        
+        let config1 = SwiftyThemeButtonConfig(colorKey: "button_title_color", state: .normal)
+        let config2 = SwiftyThemeButtonConfig(colorKey: "button_title_highlighted_color", state: .highlighted)
+        self.button.st_setTitleColor(configs: [config1, config2])
+        
+        self.view.addSubview(self.button)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 }
 
