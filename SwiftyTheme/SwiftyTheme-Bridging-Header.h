@@ -3,3 +3,4 @@
 //
 
 #import "NSObject+SwiftyThemeSwizzle.h"
+#import "SwiftyThemeObject.h"

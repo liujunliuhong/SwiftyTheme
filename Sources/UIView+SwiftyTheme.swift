@@ -30,4 +30,28 @@ extension UIView {
         SwiftyTheme.shared.hashTable.add(self)
         return self
     }
+    
+//    var sttt_backgroundColor: String? {
+//        get {
+//            let sel = "setBackgroundColor:"
+//            let args: [AnyObject] = []
+//            
+//            return objc_getAssociatedObject(self, &SwiftyThemeKeys.UIView.backgroundColor_key) as? String
+//        }
+//        set {
+//            let color = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: newValue))
+//            let sel = "setBackgroundColor:"
+//            let args: [UIColor?] = [color]
+//            
+//            let object1 = SwiftyThemeObject(obj: self, sel: sel, args: args as [AnyObject])
+//            let object2 = SwiftyThemeObject(obj: self, sel: sel, args: args as [AnyObject])
+//            object1 == object2
+//            
+//            
+//            
+//            objc_setAssociatedObject(self, &SwiftyThemeKeys.UIView.backgroundColor_key, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+//            SwiftyTheme.shared.hashTable.add(self)
+//        }
+//    }
+    
 }

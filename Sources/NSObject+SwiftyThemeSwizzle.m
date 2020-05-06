@@ -23,6 +23,7 @@
             isSuccess = NO;
         }
         
+        
         if (class_addMethod(self, selector1, method_getImplementation(method2), method_getTypeEncoding(method2))) {
             class_replaceMethod(self, selector2, method_getImplementation(method1), method_getTypeEncoding(method1));
         } else {

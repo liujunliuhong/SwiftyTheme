@@ -20,3 +20,15 @@ extension NSObject {
         }
     }
 }
+
+
+extension NSObject {
+    @objc internal(set) public var st_themes: [SwiftyThemeObject] {
+        get {
+            return (objc_getAssociatedObject(self, &SwiftyThemeKeys.Themes.key) as? [SwiftyThemeObject]) ?? []
+        }
+        set {
+            objc_setAssociatedObject(self, &SwiftyThemeKeys.Themes.key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+}

@@ -12,7 +12,12 @@ import UIKit
 fileprivate let SwifyThemeCurrentTag: String = "SwifyThemeCurrentTag"
 
 
+
 internal struct SwiftyThemeKeys {
+    struct Themes {
+        static var key = "com.yinhe.swiftyTheme.Themes.key"
+    }
+    
     struct Closure {
         static var themeChangeClosure_key = "com.yinhe.swiftyTheme.Closure.themeChangeClosure"
     }

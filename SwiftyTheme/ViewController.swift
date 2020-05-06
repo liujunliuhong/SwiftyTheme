@@ -33,6 +33,9 @@ class ViewController: UIViewController {
         self.uiSwitch.st_onTintColor(key: "uiswitch_onTintColor")
         self.view.addSubview(self.uiSwitch)
         
+        
+        
+        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
