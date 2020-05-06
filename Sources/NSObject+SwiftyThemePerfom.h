@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SwiftyThemeObject.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSObject (SwiftyThemePerfom)
 
-- (void)st_performWithSel:(NSString *)sel args:(NSArray *)args;
+- (void)st_perfomWithThemeObject:(SwiftyThemeObject *)themeObject;
 
 @end
 

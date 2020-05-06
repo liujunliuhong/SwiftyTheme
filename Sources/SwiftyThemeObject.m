@@ -9,8 +9,7 @@
 #import "SwiftyThemeObject.h"
 
 @interface SwiftyThemeObject()
-@property (nonatomic, copy) NSString *sel;
-@property (nonatomic, strong) NSArray *args;
+
 @end
 
 @implementation SwiftyThemeObject
@@ -69,4 +68,11 @@
     
     return r1 && r2;
 }
+@end
+
+
+@implementation SwiftyThemeColorObject
+@end
+
+@implementation SwiftyThemeImageObject
 @end

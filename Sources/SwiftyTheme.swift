@@ -21,11 +21,7 @@ internal struct SwiftyThemeKeys {
     struct Closure {
         static var themeChangeClosure_key = "com.yinhe.swiftyTheme.Closure.themeChangeClosure"
     }
-    
-    struct UIView {
-        static var backgroundColor_key = "com.yinhe.swiftyTheme.UIView.backgroundColor"
-        static var tintColor_key = "com.yinhe.swiftyTheme.UIView.tintColor"
-    }
+   
     
     struct UILabel {
         static var textColor_key = "com.yinhe.swiftyTheme.UILabel.textColor"
@@ -173,6 +169,15 @@ extension SwiftyTheme {
                 self.updateUIPageControlTheme(pageControl: pageControl)
             }
             self.updateNSObjectTheme(object: object)
+            
+       
+            
+            let themeObjects = (objc_getAssociatedObject(object, &SwiftyThemeKeys.Themes.key) as? [SwiftyThemeObject]) ?? []
+            
+            for (_, themeObject) in themeObjects.enumerated() {
+                let themeObject = themeObject
+                object.st_perfom(with: SwiftyTheme.shared.convertThemeObject(themeObject: themeObject))
+            }
         }
     }
     
@@ -186,18 +191,18 @@ extension SwiftyTheme {
     private func updateUIViewTheme(view: UIView) {
         do {
             // backgroundColor
-            if let key = objc_getAssociatedObject(view, &SwiftyThemeKeys.UIView.backgroundColor_key) as? String {
-                let value = SwiftyTheme.shared.getValue(key: key)
-                view.backgroundColor = SwiftyTheme.shared.getColor(key: value)
-            }
+//            if let key = objc_getAssociatedObject(view, &SwiftyThemeKeys.UIView.backgroundColor_key) as? String {
+//                let value = SwiftyTheme.shared.getValue(key: key)
+//                view.backgroundColor = SwiftyTheme.shared.getColor(key: value)
+//            }
         }
         
         do {
             // tintColor
-            if let key = objc_getAssociatedObject(view, &SwiftyThemeKeys.UIView.tintColor_key) as? String {
-                let value = SwiftyTheme.shared.getValue(key: key)
-                view.tintColor = SwiftyTheme.shared.getColor(key: value)
-            }
+//            if let key = objc_getAssociatedObject(view, &SwiftyThemeKeys.UIView.tintColor_key) as? String {
+//                let value = SwiftyTheme.shared.getValue(key: key)
+//                view.tintColor = SwiftyTheme.shared.getColor(key: value)
+//            }
         }
     }
     private func updateUILabelTheme(label: UILabel) {
@@ -457,6 +462,47 @@ extension SwiftyTheme {
                 imageView.image = UIImage.st_image(string: value)
             }
         }
+    }
+    
+    internal func addProperty(with object: NSObject, themeObject: SwiftyThemeObject) {
+        let themeObject = themeObject
+        var objects = (objc_getAssociatedObject(object, &SwiftyThemeKeys.Themes.key) as? [SwiftyThemeObject]) ?? []
+        
+        for (i, o) in objects.enumerated() {
+            if o == themeObject {
+                objects.remove(at: i) // remove
+                break
+            }
+        }
+        
+        //
+        objects.append(themeObject)
+        objc_setAssociatedObject(object, &SwiftyThemeKeys.Themes.key, objects, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        SwiftyTheme.shared.hashTable.add(self)
+        
+        //
+        object.st_perfom(with: SwiftyTheme.shared.convertThemeObject(themeObject: themeObject))
+    }
+    
+    private func convertThemeObject(themeObject: SwiftyThemeObject) -> SwiftyThemeObject {
+        let themeObject = themeObject
+        var args = themeObject.args
+        if args.count > 0 {
+            if let _ = themeObject as? SwiftyThemeColorObject,
+                let key = args.first as? String {
+                let color = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: key))
+                args.removeFirst()
+                args.insert(color as Any, at: 0)
+                themeObject.args = args
+            } else if let _ = themeObject as? SwiftyThemeImageObject,
+                let key = args.first as? String {
+                let image = UIImage.st_image(string: SwiftyTheme.shared.getValue(key: key))
+                args.removeFirst()
+                args.insert(image as Any, at: 0)
+                themeObject.args = args
+            }
+        }
+        return themeObject
     }
 }
 

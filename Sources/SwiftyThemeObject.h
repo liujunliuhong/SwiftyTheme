@@ -11,10 +11,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 @interface SwiftyThemeObject : NSObject
-@property (nonatomic, copy, readonly) NSString *sel;
-@property (nonatomic, strong, readonly) NSArray *args;
+@property (nonatomic, copy) NSString *sel;
+@property (nonatomic, strong) NSArray *args;
 - (instancetype)initWithSel:(NSString *)sel args:(NSArray *)args;
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
+@end
+
+@interface SwiftyThemeColorObject : SwiftyThemeObject
+@end
+
+@interface SwiftyThemeImageObject : SwiftyThemeObject
 @end
 NS_ASSUME_NONNULL_END
