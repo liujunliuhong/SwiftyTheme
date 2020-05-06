@@ -37,3 +37,15 @@ extension CALayer {
         return self
     }
 }
+
+extension CALayer {
+    @discardableResult
+    @objc public func st_contents(key: String?) -> Self {
+        guard let key = key else { return self }
+        let image = UIImage.st_image(string: SwiftyTheme.shared.getValue(key: key))?.cgImage
+        self.contents = image
+        objc_setAssociatedObject(self, &SwiftyThemeKeys.CALayer.contents_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        SwiftyTheme.shared.hashTable.add(self)
+        return self
+    }
+}

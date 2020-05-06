@@ -47,8 +47,8 @@ class NextViewController: UIViewController {
         self.button.center = CGPoint(x: self.view.center.x, y: self.textLabel.center.y + 150)
         self.button.bounds = CGRect(x: 0, y: 0, width: 100, height: 45)
         
-        let config1 = SwiftyThemeButtonConfig(colorKey: "button_title_color", state: .normal)
-        let config2 = SwiftyThemeButtonConfig(colorKey: "button_title_highlighted_color", state: .highlighted)
+        let config1 = SwiftyThemeButtonTitleColorConfig(colorKey: "button_title_color", state: .normal)
+        let config2 = SwiftyThemeButtonTitleColorConfig(colorKey: "button_title_highlighted_color", state: .highlighted)
         self.button.st_setTitleColor(configs: [config1, config2])
         
         self.view.addSubview(self.button)

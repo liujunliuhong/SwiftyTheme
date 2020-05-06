@@ -29,57 +29,46 @@ extension UIColor {
         string = string.replacingOccurrences(of: "0X", with: "")
         string = string.replacingOccurrences(of: " ", with: "")
         
-        var alpha: CGFloat = 1.0
-        var red: CGFloat = 0.0
-        var green: CGFloat = 0.0
-        var blue: CGFloat = 0.0
-        
         print("color string: \(string)")
         
-        if string.contains(",") {
-            // "255, 255, 255"
-            // "255, 255, 255, 1.0"
-            // "255, 255, 255, 1"
-            let splits = string.split(separator: ",")
-            let colorStrings = splits.compactMap{ "\($0)" }
-            if colorStrings.count == 3 {
-                red = CGFloat(Int(colorStrings[0]) ?? 0) / 255.0
-                green = CGFloat(Int(colorStrings[1]) ?? 0) / 255.0
-                blue = CGFloat(Int(colorStrings[2]) ?? 0) / 255.0
-            } else if colorStrings.count == 4 {
-                red = CGFloat(Int(colorStrings[0]) ?? 0) / 255.0
-                green = CGFloat(Int(colorStrings[1]) ?? 0) / 255.0
-                blue = CGFloat(Int(colorStrings[2]) ?? 0) / 255.0
-                alpha = CGFloat(Double(colorStrings[3]) ?? 1.0) // default 1.0
-            }
-        } else {
-            // hex
-            switch string.count {
-            case 3: // RGB    #fff
-                alpha = 1.0
-                red = UIColor.color(string: string, start: 0, length: 1)
-                green = UIColor.color(string: string, start: 1, length: 1)
-                blue = UIColor.color(string: string, start: 2, length: 1)
-            case 4: // ARGB   #ffff
-                alpha = UIColor.color(string: string, start: 0, length: 1)
-                red = UIColor.color(string: string, start: 1, length: 1)
-                green = UIColor.color(string: string, start: 2, length: 1)
-                blue = UIColor.color(string: string, start: 3, length: 1)
-            case 6: // RRGGBB  #ffffff
-                alpha = 1.0
-                red = UIColor.color(string: string, start: 0, length: 2)
-                green = UIColor.color(string: string, start: 2, length: 2)
-                blue = UIColor.color(string: string, start: 4, length: 2)
-            case 8: // AARRGGBB  #ffffffff
-                alpha = UIColor.color(string: string, start: 0, length: 2)
-                red = UIColor.color(string: string, start: 2, length: 2)
-                green = UIColor.color(string: string, start: 4, length: 2)
-                blue = UIColor.color(string: string, start: 6, length: 2)
-            default:
-                break
-            }
+        // "255, 255, 255"
+        if let rgbColor = string.st_rgbColor() {
+            return rgbColor
         }
-        return UIColor(red: red, green: green, blue: blue, alpha: alpha)
+        
+        
+        var hexColor: UIColor? = nil
+        // hex
+        switch string.count {
+        case 3: // RGB    #fff
+            let alpha: CGFloat = 1.0
+            let red = UIColor.color(string: string, start: 0, length: 1)
+            let green = UIColor.color(string: string, start: 1, length: 1)
+            let blue = UIColor.color(string: string, start: 2, length: 1)
+            hexColor = UIColor(red: red, green: green, blue: blue, alpha: alpha)
+        case 4: // ARGB   #ffff
+            let alpha = UIColor.color(string: string, start: 0, length: 1)
+            let red = UIColor.color(string: string, start: 1, length: 1)
+            let green = UIColor.color(string: string, start: 2, length: 1)
+            let blue = UIColor.color(string: string, start: 3, length: 1)
+            hexColor = UIColor(red: red, green: green, blue: blue, alpha: alpha)
+        case 6: // RRGGBB  #ffffff
+            let alpha: CGFloat = 1.0
+            let red = UIColor.color(string: string, start: 0, length: 2)
+            let green = UIColor.color(string: string, start: 2, length: 2)
+            let blue = UIColor.color(string: string, start: 4, length: 2)
+            hexColor = UIColor(red: red, green: green, blue: blue, alpha: alpha)
+        case 8: // AARRGGBB  #ffffffff
+            let alpha = UIColor.color(string: string, start: 0, length: 2)
+            let red = UIColor.color(string: string, start: 2, length: 2)
+            let green = UIColor.color(string: string, start: 4, length: 2)
+            let blue = UIColor.color(string: string, start: 6, length: 2)
+            hexColor = UIColor(red: red, green: green, blue: blue, alpha: alpha)
+        default:
+            break
+        }
+        
+        return hexColor
     }
 }
 

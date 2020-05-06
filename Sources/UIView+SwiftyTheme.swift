@@ -22,9 +22,12 @@ extension UIView {
         return self
     }
     
-    @objc public func st_tintColor(key: String) {
-        
+    @discardableResult
+    @objc public func st_tintColor(key: String?) -> Self {
+        guard let key = key else { return self }
+        self.tintColor = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: key))
+        objc_setAssociatedObject(self, &SwiftyThemeKeys.UIView.tintColor_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        SwiftyTheme.shared.hashTable.add(self)
+        return self
     }
-    
-    
 }

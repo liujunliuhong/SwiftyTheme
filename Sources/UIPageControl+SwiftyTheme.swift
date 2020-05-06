@@ -28,3 +28,9 @@ extension UIPageControl {
         return self
     }
 }
+
+extension UIPageControl {
+    func asdas() {
+        
+    }
+}

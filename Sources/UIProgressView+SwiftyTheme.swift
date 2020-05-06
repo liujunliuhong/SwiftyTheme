@@ -31,3 +31,23 @@ extension UIProgressView {
 }
 
 
+
+extension UIProgressView {
+    @discardableResult
+    @objc public func st_progressImage(key: String?) -> Self {
+        guard let key = key else { return self }
+        self.progressImage = UIImage.st_image(string: SwiftyTheme.shared.getValue(key: key))
+        objc_setAssociatedObject(self, &SwiftyThemeKeys.UIProgressView.progressImage_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        SwiftyTheme.shared.hashTable.add(self)
+        return self
+    }
+    
+    @discardableResult
+    @objc public func st_trackImage(key: String?) -> Self {
+        guard let key = key else { return self }
+        self.trackImage = UIImage.st_image(string: SwiftyTheme.shared.getValue(key: key))
+        objc_setAssociatedObject(self, &SwiftyThemeKeys.UIProgressView.trackImage_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        SwiftyTheme.shared.hashTable.add(self)
+        return self
+    }
+}

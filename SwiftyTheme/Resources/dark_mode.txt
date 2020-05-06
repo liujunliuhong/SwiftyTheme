@@ -9,3 +9,9 @@
 
 "button_title_color" = "#006400";
 "button_title_highlighted_color" = "#FF0000";
+
+
+
+
+
+//"image_path" = "";

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-@objc public class SwiftyThemeButtonConfig: NSObject {
+@objc public class SwiftyThemeButtonTitleColorConfig: NSObject {
     @objc public var colorKey: String?
     @objc public var state: UIControl.State = .normal
     @objc public override init() {
@@ -23,9 +23,23 @@ import UIKit
     }
 }
 
+@objc public class SwiftyThemeButtonImageConfig: NSObject {
+    @objc public var imageKey: String?
+    @objc public var state: UIControl.State = .normal
+    @objc public override init() {
+        super.init()
+    }
+    
+    @objc public init(imageKey: String?, state: UIControl.State) {
+        self.imageKey = imageKey
+        super.init()
+        self.state = state
+    }
+}
+
 extension UIButton {
     @discardableResult
-    @objc public func st_setTitleColor(configs: [SwiftyThemeButtonConfig]) -> Self {
+    @objc public func st_setTitleColor(configs: [SwiftyThemeButtonTitleColorConfig]) -> Self {
         if configs.count <= 0 {
             return self
         }
@@ -41,3 +55,43 @@ extension UIButton {
         return self
     }
 }
+
+
+extension UIButton {
+    @discardableResult
+    @objc public func st_setImage(configs: [SwiftyThemeButtonImageConfig]) -> Self {
+        if configs.count <= 0 {
+            return self
+        }
+        
+        for (_, config) in configs.enumerated() {
+            let image = UIImage.st_image(string: SwiftyTheme.shared.getValue(key: config.imageKey))
+            let state = config.state
+            self.setImage(image, for: state)
+        }
+        
+        objc_setAssociatedObject(self, &SwiftyThemeKeys.UIButton.image_key, configs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        SwiftyTheme.shared.hashTable.add(self)
+        return self
+    }
+    
+    
+    @discardableResult
+    @objc public func st_setBackgroundImage(configs: [SwiftyThemeButtonImageConfig]) -> Self {
+        if configs.count <= 0 {
+            return self
+        }
+        
+        for (_, config) in configs.enumerated() {
+            let image = UIImage.st_image(string: SwiftyTheme.shared.getValue(key: config.imageKey))
+            let state = config.state
+            self.setBackgroundImage(image, for: state)
+        }
+        
+        objc_setAssociatedObject(self, &SwiftyThemeKeys.UIButton.backgroundImage_key, configs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        SwiftyTheme.shared.hashTable.add(self)
+        return self
+    }
+}
+
+

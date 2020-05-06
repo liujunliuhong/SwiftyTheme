@@ -19,6 +19,7 @@ internal struct SwiftyThemeKeys {
     
     struct UIView {
         static var backgroundColor_key = "com.yinhe.swiftyTheme.UIView.backgroundColor"
+        static var tintColor_key = "com.yinhe.swiftyTheme.UIView.tintColor"
     }
     
     struct UILabel {
@@ -27,6 +28,8 @@ internal struct SwiftyThemeKeys {
     
     struct UIButton {
         static var titleColor_key = "com.yinhe.swiftyTheme.UIButton.titleColor"
+        static var image_key = "com.yinhe.swiftyTheme.UIButton.image"
+        static var backgroundImage_key = "com.yinhe.swiftyTheme.UIButton.backgroundImage"
     }
     
     struct UISwitch {
@@ -38,6 +41,7 @@ internal struct SwiftyThemeKeys {
         static var backgroundColor_key = "com.yinhe.swiftyTheme.CALayer.backgroundColor"
         static var borderColor_key = "com.yinhe.swiftyTheme.CALayer.borderColor"
         static var shadowColor_key = "com.yinhe.swiftyTheme.CALayer.shadowColor"
+        static var contents_key = "com.yinhe.swiftyTheme.CALayer.contens"
     }
     
     struct CAShapeLayer {
@@ -55,17 +59,26 @@ internal struct SwiftyThemeKeys {
     struct UIProgressView {
         static var progressTintColor_key = "com.yinhe.swiftyTheme.UIProgressView.progressTintColor"
         static var trackTintColor_key = "com.yinhe.swiftyTheme.UIProgressView.trackTintColor"
+        static var progressImage_key = "com.yinhe.swiftyTheme.UIProgressView.progressImage"
+        static var trackImage_key = "com.yinhe.swiftyTheme.UIProgressView.trackImage"
     }
     
     struct UISlider {
         static var thumbTintColor_key = "com.yinhe.swiftyTheme.UISlider.thumbTintColor"
         static var minimumTrackTintColor_key = "com.yinhe.swiftyTheme.UISlider.minimumTrackTintColor"
         static var maximumTrackTintColor_key = "com.yinhe.swiftyTheme.UISlider.maximumTrackTintColor"
+        static var thumbImage_key = "com.yinhe.swiftyTheme.UISlider.thumbImage"
+        static var maximumTrackImage_key = "com.yinhe.swiftyTheme.UISlider.maximumTrackImage"
+        static var minimumTrackImage_key = "com.yinhe.swiftyTheme.UISlider.minimumTrackImage"
     }
     
     struct UIPageControl {
         static var pageIndicatorTintColor_key = "com.yinhe.swiftyTheme.UIPageControl.pageIndicatorTintColor"
         static var currentPageIndicatorTintColor_key = "com.yinhe.swiftyTheme.UIPageControl.currentPageIndicatorTintColor"
+    }
+    
+    struct UIImageView {
+        static var image_key = "com.yinhe.swiftyTheme.UIImageView.image"
     }
 }
 
@@ -115,10 +128,17 @@ internal struct SwiftyThemeKeys {
 }
 
 extension SwiftyTheme {
+    @objc public func setup() {
+        
+    }
+    
     @objc private func updateTheme() {
         for (_, object) in self.hashTable.allObjects.enumerated() {
             if let view = object as? UIView {
                 self.updateUIViewTheme(view: view)
+            }
+            if let imageView = object as? UIImageView {
+                self.updateUIImageViewTheme(imageView: imageView)
             }
             if let label = object as? UILabel {
                 self.updateUILabelTheme(label: label)
@@ -168,7 +188,11 @@ extension SwiftyTheme {
         }
         
         do {
-            
+            // tintColor
+            if let key = objc_getAssociatedObject(view, &SwiftyThemeKeys.UIView.tintColor_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                view.tintColor = SwiftyTheme.shared.getColor(key: value)
+            }
         }
     }
     private func updateUILabelTheme(label: UILabel) {
@@ -204,12 +228,34 @@ extension SwiftyTheme {
     private func updateUIButtonTheme(button: UIButton) {
         do {
             // titleColor
-            if let configs = objc_getAssociatedObject(button, &SwiftyThemeKeys.UIButton.titleColor_key) as? [SwiftyThemeButtonConfig],
+            if let configs = objc_getAssociatedObject(button, &SwiftyThemeKeys.UIButton.titleColor_key) as? [SwiftyThemeButtonTitleColorConfig],
                 configs.count > 0 {
                 for (_, config) in configs.enumerated() {
                     let color = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: config.colorKey))
                     let state = config.state
                     button.setTitleColor(color, for: state)
+                }
+            }
+        }
+        do {
+            // image
+            if let configs = objc_getAssociatedObject(button, &SwiftyThemeKeys.UIButton.image_key) as? [SwiftyThemeButtonImageConfig],
+                configs.count > 0 {
+                for (_, config) in configs.enumerated() {
+                    let image = UIImage.st_image(string: SwiftyTheme.shared.getValue(key: config.imageKey))
+                    let state = config.state
+                    button.setImage(image, for: state)
+                }
+            }
+        }
+        do {
+            // backgroundImage
+            if let configs = objc_getAssociatedObject(button, &SwiftyThemeKeys.UIButton.backgroundImage_key) as? [SwiftyThemeButtonImageConfig],
+                configs.count > 0 {
+                for (_, config) in configs.enumerated() {
+                    let image = UIImage.st_image(string: SwiftyTheme.shared.getValue(key: config.imageKey))
+                    let state = config.state
+                    button.setBackgroundImage(image, for: state)
                 }
             }
         }
@@ -235,6 +281,13 @@ extension SwiftyTheme {
             if let key = objc_getAssociatedObject(layer, &SwiftyThemeKeys.CALayer.shadowColor_key) as? String {
                 let value = SwiftyTheme.shared.getValue(key: key)
                 layer.shadowColor = SwiftyTheme.shared.getColor(key: value)?.cgColor
+            }
+        }
+        do {
+            // contents
+            if let key = objc_getAssociatedObject(layer, &SwiftyThemeKeys.CALayer.contents_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                layer.contents = UIImage.st_image(string: value)?.cgImage
             }
         }
     }
@@ -301,6 +354,20 @@ extension SwiftyTheme {
                 progressView.trackTintColor = SwiftyTheme.shared.getColor(key: value)
             }
         }
+        do {
+            // progressImage
+            if let key = objc_getAssociatedObject(progressView, &SwiftyThemeKeys.UIProgressView.progressImage_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                progressView.progressImage = UIImage.st_image(string: value)
+            }
+        }
+        do {
+            // trackImage
+            if let key = objc_getAssociatedObject(progressView, &SwiftyThemeKeys.UIProgressView.trackImage_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                progressView.trackImage = UIImage.st_image(string: value)
+            }
+        }
     }
     
     private func updateUISliderTheme(slider: UISlider) {
@@ -325,6 +392,39 @@ extension SwiftyTheme {
                 slider.maximumTrackTintColor = SwiftyTheme.shared.getColor(key: value)
             }
         }
+        do {
+            // thumbImage
+            if let configs = objc_getAssociatedObject(slider, &SwiftyThemeKeys.UISlider.thumbImage_key) as? [SwiftyThemeSliderImageConfig],
+                configs.count > 0 {
+                for (_, config) in configs.enumerated() {
+                    let image = UIImage.st_image(string: SwiftyTheme.shared.getValue(key: config.imageKey))
+                    let state = config.state
+                    slider.setThumbImage(image, for: state)
+                }
+            }
+        }
+        do {
+            // minimumTrackImage
+            if let configs = objc_getAssociatedObject(slider, &SwiftyThemeKeys.UISlider.minimumTrackImage_key) as? [SwiftyThemeSliderImageConfig],
+                configs.count > 0 {
+                for (_, config) in configs.enumerated() {
+                    let image = UIImage.st_image(string: SwiftyTheme.shared.getValue(key: config.imageKey))
+                    let state = config.state
+                    slider.setMinimumTrackImage(image, for: state)
+                }
+            }
+        }
+        do {
+            // maximumTrackImage
+            if let configs = objc_getAssociatedObject(slider, &SwiftyThemeKeys.UISlider.maximumTrackImage_key) as? [SwiftyThemeSliderImageConfig],
+                configs.count > 0 {
+                for (_, config) in configs.enumerated() {
+                    let image = UIImage.st_image(string: SwiftyTheme.shared.getValue(key: config.imageKey))
+                    let state = config.state
+                    slider.setMaximumTrackImage(image, for: state)
+                }
+            }
+        }
     }
     
     private func updateUIPageControlTheme(pageControl: UIPageControl) {
@@ -343,6 +443,16 @@ extension SwiftyTheme {
             }
         }
     }
+    
+    private func updateUIImageViewTheme(imageView: UIImageView) {
+        do {
+            // image
+            if let key = objc_getAssociatedObject(imageView, &SwiftyThemeKeys.UIImageView.image_key) as? String {
+                let value = SwiftyTheme.shared.getValue(key: key)
+                imageView.image = UIImage.st_image(string: value)
+            }
+        }
+    }
 }
 
 extension SwiftyTheme {
@@ -350,13 +460,16 @@ extension SwiftyTheme {
         
         if let bundlePath = bundlePath {
             SwiftyTheme.shared.tagInfo[themeTag] = bundlePath
+            return
         }
         
         if let documentpatch = SwiftyTheme.shared.documentpatch,
             let sandBoxRelativePath = sandBoxRelativePath {
             let fullPath = documentpatch + "/" + sandBoxRelativePath
             SwiftyTheme.shared.tagInfo[themeTag] = fullPath
+            return
         }
+        print("path error.")
     }
     
     @objc public func switchToTheme(tag: String?) {
