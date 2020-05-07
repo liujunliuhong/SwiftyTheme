@@ -35,8 +35,8 @@ class NextViewController: UIViewController {
         
         self.textLabel.center = CGPoint(x: self.view.center.x, y: UIApplication.shared.statusBarFrame.height + 44.0 + 100)
         self.textLabel.bounds = CGRect(x: 0, y: 0, width: 200, height: 100)
-        self.textLabel.st_textColor(key: "label_textColor")
-//        self.textLabel.st_backgroundColor(key: "label_backgroundColor")
+        self.textLabel.st_textColor = "label_textColor"
+        self.textLabel.st_backgroundColor = "label_backgroundColor"
         self.textLabel.st_themeChangeClosure = {
             print("11111")
         }
@@ -47,25 +47,10 @@ class NextViewController: UIViewController {
         self.button.center = CGPoint(x: self.view.center.x, y: self.textLabel.center.y + 150)
         self.button.bounds = CGRect(x: 0, y: 0, width: 100, height: 45)
         
-        let config1 = SwiftyThemeButtonTitleColorConfig(colorKey: "button_title_color", state: .normal)
-        let config2 = SwiftyThemeButtonTitleColorConfig(colorKey: "button_title_highlighted_color", state: .highlighted)
-        self.button.st_setTitleColor(configs: [config1, config2])
+        self.button.st_setTitleColor("button_title_color", forState: .normal)
+        self.button.st_setTitleColor("button_title_highlighted_color", forState: .highlighted)
         
         self.view.addSubview(self.button)
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
 }
 

@@ -10,9 +10,10 @@
 #import <UIKit/UIKit.h>
 
 @implementation NSObject (SwiftyThemePerfom)
-- (void)st_perfomWithThemeObject:(SwiftyThemeObject *)themeObject{
+
+- (void)st_perfomWithSelectorString:(NSString *)selectorString args:(NSArray *)args{
     
-    SEL selector = NSSelectorFromString(themeObject.sel);
+    SEL selector = NSSelectorFromString(selectorString);
     
     NSMethodSignature *signature = [self methodSignatureForSelector:selector];
     
@@ -29,22 +30,19 @@
     [invocation setTarget:self];
     [invocation setSelector:selector];
     
-    if (signature.numberOfArguments == themeObject.args.count + 2) {
-        
-        [themeObject.args enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            
+    if (signature.numberOfArguments == args.count + 2) {
+        [args enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             NSInteger index = idx + 2;
             [self setInvocation:invocation signature:signature arg:obj index:index];
-            
         }];
-        
+        [invocation invoke];
     } else {
         NSAssert(YES, @"参数个数与方法参数个数不匹配");
     }
-    
 }
 
 
+// 参考:https://github.com/lixiang1994/LEETheme
 - (void)setInvocation:(NSInvocation *)invocation signature:(NSMethodSignature *)signature arg:(id)arg index:(NSInteger)index{
     
     if (signature.numberOfArguments <= index) return;

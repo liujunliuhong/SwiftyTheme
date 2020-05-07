@@ -10,22 +10,44 @@ import Foundation
 import UIKit
 
 extension UISwitch {
-    @discardableResult
-    @objc public func st_onTintColor(key: String?) -> Self {
-        guard let key = key else { return self }
-        self.onTintColor = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: key))
-        objc_setAssociatedObject(self, &SwiftyThemeKeys.UISwitch.onTintColor_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-        SwiftyTheme.shared.hashTable.add(self)
-        return self
+    fileprivate struct UISwitchKeys {
+        static var onTintColor_key = "com.yinhe.swiftyTheme.UISwitch.onTintColor"
+        static var thumbTintColor_key = "com.yinhe.swiftyTheme.UISwitch.thumbTintColor"
+    }
+}
+
+
+extension UISwitch {
+    @objc public var st_onTintColor: String? {
+        get {
+            return objc_getAssociatedObject(self, &UISwitch.UISwitchKeys.onTintColor_key) as? String
+        }
+        set {
+            let sel = "setOnTintColor:"
+            let args: [SwiftyThemeColorKey] = [SwiftyThemeColorKey(key: newValue)]
+            
+            let themeObject = SwiftyThemeObject(selector: sel, args: args as [AnyObject], isEmpty: newValue == nil)
+            
+            SwiftyTheme.shared.addProperty(with: self, themeObject: themeObject)
+            
+            objc_setAssociatedObject(self, &UISwitch.UISwitchKeys.onTintColor_key, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
     }
     
-    @discardableResult
-    @objc public func st_thumbTintColor(key: String?) -> Self {
-        guard let key = key else { return self }
-        self.thumbTintColor = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: key))
-        objc_setAssociatedObject(self, &SwiftyThemeKeys.UISwitch.thumbTintColor_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-        SwiftyTheme.shared.hashTable.add(self)
-        return self
+    @objc public var st_thumbTintColor: String? {
+        get {
+            return objc_getAssociatedObject(self, &UISwitch.UISwitchKeys.thumbTintColor_key) as? String
+        }
+        set {
+            let sel = "setThumbTintColor:"
+            let args: [SwiftyThemeColorKey] = [SwiftyThemeColorKey(key: newValue)]
+            
+            let themeObject = SwiftyThemeObject(selector: sel, args: args as [AnyObject], isEmpty: newValue == nil)
+            
+            SwiftyTheme.shared.addProperty(with: self, themeObject: themeObject)
+            
+            objc_setAssociatedObject(self, &UISwitch.UISwitchKeys.thumbTintColor_key, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
     }
 }
 

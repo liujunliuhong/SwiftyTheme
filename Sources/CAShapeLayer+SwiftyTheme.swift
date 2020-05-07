@@ -10,21 +10,42 @@ import Foundation
 import UIKit
 
 extension CAShapeLayer {
-    @discardableResult
-    @objc public func st_fillColor(key: String?) -> Self {
-        guard let key = key else { return self }
-        self.fillColor = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: key))?.cgColor
-        objc_setAssociatedObject(self, &SwiftyThemeKeys.CAShapeLayer.fillColor_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-        SwiftyTheme.shared.hashTable.add(self)
-        return self
+    fileprivate struct CAShapeLayerKeys {
+        static var fillColor_key = "com.yinhe.swiftyTheme.CAShapeLayer.fillColor"
+        static var strokeColor_key = "com.yinhe.swiftyTheme.CAShapeLayer.strokeColor"
+    }
+}
+
+extension CAShapeLayer {
+    @objc public var st_fillColor: String? {
+        get {
+            return objc_getAssociatedObject(self, &CAShapeLayer.CAShapeLayerKeys.fillColor_key) as? String
+        }
+        set {
+            let sel = "setFillColor:"
+            let args: [SwiftyThemeColorKey] = [SwiftyThemeColorKey(key: newValue)]
+            
+            let themeObject = SwiftyThemeObject(selector: sel, args: args as [AnyObject], isEmpty: newValue == nil)
+            
+            SwiftyTheme.shared.addProperty(with: self, themeObject: themeObject)
+            
+            objc_setAssociatedObject(self, &CAShapeLayer.CAShapeLayerKeys.fillColor_key, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
     }
     
-    @discardableResult
-    @objc public func st_strokeColor(key: String?) -> Self {
-        guard let key = key else { return self }
-        self.strokeColor = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: key))?.cgColor
-        objc_setAssociatedObject(self, &SwiftyThemeKeys.CAShapeLayer.strokeColor_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-        SwiftyTheme.shared.hashTable.add(self)
-        return self
+    @objc public var st_strokeColor: String? {
+        get {
+            return objc_getAssociatedObject(self, &CAShapeLayer.CAShapeLayerKeys.strokeColor_key) as? String
+        }
+        set {
+            let sel = "setStrokeColor:"
+            let args: [SwiftyThemeColorKey] = [SwiftyThemeColorKey(key: newValue)]
+            
+            let themeObject = SwiftyThemeObject(selector: sel, args: args as [AnyObject], isEmpty: newValue == nil)
+            
+            SwiftyTheme.shared.addProperty(with: self, themeObject: themeObject)
+            
+            objc_setAssociatedObject(self, &CAShapeLayer.CAShapeLayerKeys.strokeColor_key, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
     }
 }

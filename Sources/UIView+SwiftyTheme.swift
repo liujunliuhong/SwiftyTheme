@@ -24,9 +24,9 @@ extension UIView {
         }
         set {
             let sel = "setBackgroundColor:"
-            let args: [String?] = [newValue]
+            let args: [SwiftyThemeColorKey] = [SwiftyThemeColorKey(key: newValue)]
             
-            let themeObject = SwiftyThemeColorObject(sel: sel, args: args as [Any])
+            let themeObject = SwiftyThemeObject(selector: sel, args: args as [AnyObject], isEmpty: newValue == nil)
             
             SwiftyTheme.shared.addProperty(with: self, themeObject: themeObject)
             
@@ -39,11 +39,9 @@ extension UIView {
         get { return objc_getAssociatedObject(self, &UIView.UIViewKeys.tintColor_key) as? String }
         set {
             let sel = "setTintColor:"
-            let args: [String?] = [newValue]
+            let args: [SwiftyThemeColorKey] = [SwiftyThemeColorKey(key: newValue)]
             
-            let themeObject = SwiftyThemeColorObject(sel: sel, args: args as [Any])
-            
-            
+            let themeObject = SwiftyThemeObject(selector: sel, args: args as [AnyObject], isEmpty: newValue == nil)
             
             SwiftyTheme.shared.addProperty(with: self, themeObject: themeObject)
             

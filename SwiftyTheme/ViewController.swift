@@ -26,11 +26,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.view.st_backgroundColor(key: "uiview_backgroundColor")
         
-   
+        self.view.st_backgroundColor = "uiview_backgroundColor"
+        
         self.uiSwitch.center = CGPoint(x: 50, y: UIApplication.shared.statusBarFrame.height + 44.0 + 50)
-        self.uiSwitch.st_onTintColor(key: "uiswitch_onTintColor")
+        self.uiSwitch.st_onTintColor = "uiswitch_onTintColor"
         self.view.addSubview(self.uiSwitch)
         
         

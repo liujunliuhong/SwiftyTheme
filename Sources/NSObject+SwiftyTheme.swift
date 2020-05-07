@@ -11,24 +11,21 @@ import Foundation
 public typealias SwiftyThemeChangeClosure = () -> ()
 
 extension NSObject {
+    internal(set) public var st_themes: [SwiftyThemeObject] {
+        get {
+            return (objc_getAssociatedObject(self, &SwiftyThemeKeys.Themes.key) as? [SwiftyThemeObject]) ?? []
+        }
+        set {
+            objc_setAssociatedObject(self, &SwiftyThemeKeys.Themes.key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
     @objc internal(set) public var st_themeChangeClosure: SwiftyThemeChangeClosure? {
         get {
             return objc_getAssociatedObject(self, &SwiftyThemeKeys.Closure.themeChangeClosure_key) as? SwiftyThemeChangeClosure
         }
         set {
             objc_setAssociatedObject(self, &SwiftyThemeKeys.Closure.themeChangeClosure_key, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-        }
-    }
-}
-
-
-extension NSObject {
-    @objc internal(set) public var st_themes: [SwiftyThemeObject] {
-        get {
-            return (objc_getAssociatedObject(self, &SwiftyThemeKeys.Themes.key) as? [SwiftyThemeObject]) ?? []
-        }
-        set {
-            objc_setAssociatedObject(self, &SwiftyThemeKeys.Themes.key, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
 }

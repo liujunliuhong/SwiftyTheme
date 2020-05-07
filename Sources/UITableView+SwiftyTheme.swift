@@ -11,39 +11,77 @@ import UIKit
 
 
 extension UITableView {
-    @discardableResult
-    @objc public func st_separatorColor(key: String?) -> Self {
-        guard let key = key else { return self }
-        self.separatorColor = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: key))
-        objc_setAssociatedObject(self, &SwiftyThemeKeys.UITableView.separatorColor_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-        SwiftyTheme.shared.hashTable.add(self)
-        return self
+    fileprivate struct UITableViewKeys {
+        static var separatorColor_key = "com.yinhe.swiftyTheme.UITableView.separatorColor"
+        static var sectionIndexColor_key = "com.yinhe.swiftyTheme.UITableView.sectionIndexColor"
+        static var sectionIndexBackgroundColor_key = "com.yinhe.swiftyTheme.UITableView.sectionIndexBackgroundColor"
+        static var sectionIndexTrackingBackgroundColor_key = "com.yinhe.swiftyTheme.UITableView.sectionIndexTrackingBackgroundColor"
+    }
+}
+
+extension UITableView {
+    
+    @objc public var st_separatorColor: String? {
+        get {
+            return objc_getAssociatedObject(self, &UITableView.UITableViewKeys.separatorColor_key) as? String
+        }
+        set {
+            let sel = "setSeparatorColor:"
+            let args: [SwiftyThemeColorKey] = [SwiftyThemeColorKey(key: newValue)]
+            
+            let themeObject = SwiftyThemeObject(selector: sel, args: args as [AnyObject], isEmpty: newValue == nil)
+            
+            SwiftyTheme.shared.addProperty(with: self, themeObject: themeObject)
+            
+            objc_setAssociatedObject(self, &UITableView.UITableViewKeys.separatorColor_key, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
     }
     
-    @discardableResult
-    @objc public func st_sectionIndexColor(key: String?) -> Self {
-        guard let key = key else { return self }
-        self.sectionIndexColor = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: key))
-        objc_setAssociatedObject(self, &SwiftyThemeKeys.UITableView.sectionIndexColor_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-        SwiftyTheme.shared.hashTable.add(self)
-        return self
+    @objc public var st_sectionIndexColor: String? {
+        get {
+            return objc_getAssociatedObject(self, &UITableView.UITableViewKeys.sectionIndexColor_key) as? String
+        }
+        set {
+            let sel = "setSectionIndexColor:"
+            let args: [SwiftyThemeColorKey] = [SwiftyThemeColorKey(key: newValue)]
+            
+            let themeObject = SwiftyThemeObject(selector: sel, args: args as [AnyObject], isEmpty: newValue == nil)
+            
+            SwiftyTheme.shared.addProperty(with: self, themeObject: themeObject)
+            
+            objc_setAssociatedObject(self, &UITableView.UITableViewKeys.sectionIndexColor_key, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
     }
     
-    @discardableResult
-    @objc public func st_sectionIndexBackgroundColor(key: String?) -> Self {
-        guard let key = key else { return self }
-        self.sectionIndexBackgroundColor = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: key))
-        objc_setAssociatedObject(self, &SwiftyThemeKeys.UITableView.sectionIndexBackgroundColor_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-        SwiftyTheme.shared.hashTable.add(self)
-        return self
+    @objc public var st_sectionIndexBackgroundColor: String? {
+        get {
+            return objc_getAssociatedObject(self, &UITableView.UITableViewKeys.sectionIndexBackgroundColor_key) as? String
+        }
+        set {
+            let sel = "setSectionIndexBackgroundColor:"
+            let args: [SwiftyThemeColorKey] = [SwiftyThemeColorKey(key: newValue)]
+            
+            let themeObject = SwiftyThemeObject(selector: sel, args: args as [AnyObject], isEmpty: newValue == nil)
+            
+            SwiftyTheme.shared.addProperty(with: self, themeObject: themeObject)
+            
+            objc_setAssociatedObject(self, &UITableView.UITableViewKeys.sectionIndexBackgroundColor_key, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
     }
     
-    @discardableResult
-    @objc public func st_sectionIndexTrackingBackgroundColor(key: String?) -> Self {
-        guard let key = key else { return self }
-        self.sectionIndexTrackingBackgroundColor = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: key))
-        objc_setAssociatedObject(self, &SwiftyThemeKeys.UITableView.sectionIndexTrackingBackgroundColor_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-        SwiftyTheme.shared.hashTable.add(self)
-        return self
+    @objc public var st_sectionIndexTrackingBackgroundColor: String? {
+        get {
+            return objc_getAssociatedObject(self, &UITableView.UITableViewKeys.sectionIndexTrackingBackgroundColor_key) as? String
+        }
+        set {
+            let sel = "setSectionIndexTrackingBackgroundColor:"
+            let args: [SwiftyThemeColorKey] = [SwiftyThemeColorKey(key: newValue)]
+            
+            let themeObject = SwiftyThemeObject(selector: sel, args: args as [AnyObject], isEmpty: newValue == nil)
+            
+            SwiftyTheme.shared.addProperty(with: self, themeObject: themeObject)
+            
+            objc_setAssociatedObject(self, &UITableView.UITableViewKeys.sectionIndexTrackingBackgroundColor_key, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
+        }
     }
 }

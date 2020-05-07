@@ -9,100 +9,90 @@
 import Foundation
 import UIKit
 
-@objc public class SwiftyThemeSliderImageConfig: NSObject {
-    @objc public var imageKey: String?
-    @objc public var state: UIControl.State = .normal
-    @objc public override init() {
-        super.init()
-    }
-    
-    @objc public init(imageKey: String?, state: UIControl.State) {
-        self.imageKey = imageKey
-        super.init()
-        self.state = state
-    }
-}
-
 
 extension UISlider {
-    @discardableResult
-    @objc public func st_thumbTintColor(key: String?) -> Self {
-        guard let key = key else { return self }
-        self.thumbTintColor = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: key))
-        objc_setAssociatedObject(self, &SwiftyThemeKeys.UISlider.thumbTintColor_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-        SwiftyTheme.shared.hashTable.add(self)
-        return self
-    }
-    
-    @discardableResult
-    @objc public func st_minimumTrackTintColor(key: String?) -> Self {
-        guard let key = key else { return self }
-        self.minimumTrackTintColor = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: key))
-        objc_setAssociatedObject(self, &SwiftyThemeKeys.UISlider.minimumTrackTintColor_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-        SwiftyTheme.shared.hashTable.add(self)
-        return self
-    }
-    
-    @discardableResult
-    @objc public func st_maximumTrackTintColor(key: String?) -> Self {
-        guard let key = key else { return self }
-        self.maximumTrackTintColor = SwiftyTheme.shared.getColor(key: SwiftyTheme.shared.getValue(key: key))
-        objc_setAssociatedObject(self, &SwiftyThemeKeys.UISlider.maximumTrackTintColor_key, key, .OBJC_ASSOCIATION_COPY_NONATOMIC)
-        SwiftyTheme.shared.hashTable.add(self)
-        return self
+    fileprivate struct UISliderKeys {
+        static var thumbTintColor_key = "com.yinhe.swiftyTheme.UISlider.thumbTintColor"
+        static var minimumTrackTintColor_key = "com.yinhe.swiftyTheme.UISlider.minimumTrackTintColor"
+        static var maximumTrackTintColor_key = "com.yinhe.swiftyTheme.UISlider.maximumTrackTintColor"
+        
+        static var thumbImage_key = "com.yinhe.swiftyTheme.UISlider.thumbImage"
+        static var maximumTrackImage_key = "com.yinhe.swiftyTheme.UISlider.maximumTrackImage"
+        static var minimumTrackImage_key = "com.yinhe.swiftyTheme.UISlider.minimumTrackImage"
     }
 }
 
 extension UISlider {
-    @discardableResult
-    @objc public func st_setThumbImage(configs: [SwiftyThemeSliderImageConfig]) -> Self {
-        if configs.count <= 0 {
-            return self
+    
+    @objc public var st_thumbTintColor: String? {
+        get {
+            return objc_getAssociatedObject(self, &UISlider.UISliderKeys.thumbTintColor_key) as? String
         }
-        
-        for (_, config) in configs.enumerated() {
-            let image = UIImage.st_image(string: SwiftyTheme.shared.getValue(key: config.imageKey))
-            let state = config.state
-            self.setThumbImage(image, for: state)
+        set {
+            let sel = "setThumbTintColor:"
+            let args: [SwiftyThemeColorKey] = [SwiftyThemeColorKey(key: newValue)]
+            
+            let themeObject = SwiftyThemeObject(selector: sel, args: args as [AnyObject], isEmpty: newValue == nil)
+            
+            SwiftyTheme.shared.addProperty(with: self, themeObject: themeObject)
+            
+            objc_setAssociatedObject(self, &UISlider.UISliderKeys.thumbTintColor_key, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
-        
-        objc_setAssociatedObject(self, &SwiftyThemeKeys.UISlider.thumbImage_key, configs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        SwiftyTheme.shared.hashTable.add(self)
-        return self
     }
     
-    @discardableResult
-    @objc public func st_setMinimumTrackImage(configs: [SwiftyThemeSliderImageConfig]) -> Self {
-        if configs.count <= 0 {
-            return self
+    @objc public var st_minimumTrackTintColor: String? {
+        get {
+            return objc_getAssociatedObject(self, &UISlider.UISliderKeys.minimumTrackTintColor_key) as? String
         }
-        
-        for (_, config) in configs.enumerated() {
-            let image = UIImage.st_image(string: SwiftyTheme.shared.getValue(key: config.imageKey))
-            let state = config.state
-            self.setMinimumTrackImage(image, for: state)
+        set {
+            let sel = "setMinimumTrackTintColor:"
+            let args: [SwiftyThemeColorKey] = [SwiftyThemeColorKey(key: newValue)]
+            
+            let themeObject = SwiftyThemeObject(selector: sel, args: args as [AnyObject], isEmpty: newValue == nil)
+            
+            SwiftyTheme.shared.addProperty(with: self, themeObject: themeObject)
+            
+            objc_setAssociatedObject(self, &UISlider.UISliderKeys.minimumTrackTintColor_key, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
-        
-        objc_setAssociatedObject(self, &SwiftyThemeKeys.UISlider.minimumTrackImage_key, configs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        SwiftyTheme.shared.hashTable.add(self)
-        return self
     }
     
-    @discardableResult
-    @objc public func st_setMaximumTrackImage(configs: [SwiftyThemeSliderImageConfig]) -> Self {
-        if configs.count <= 0 {
-            return self
+    @objc public var st_maximumTrackTintColor: String? {
+        get {
+            return objc_getAssociatedObject(self, &UISlider.UISliderKeys.maximumTrackTintColor_key) as? String
         }
-        
-        for (_, config) in configs.enumerated() {
-            let image = UIImage.st_image(string: SwiftyTheme.shared.getValue(key: config.imageKey))
-            let state = config.state
-            self.setMaximumTrackImage(image, for: state)
+        set {
+            let sel = "setMaximumTrackTintColor:"
+            let args: [SwiftyThemeColorKey] = [SwiftyThemeColorKey(key: newValue)]
+            
+            let themeObject = SwiftyThemeObject(selector: sel, args: args as [AnyObject], isEmpty: newValue == nil)
+            
+            SwiftyTheme.shared.addProperty(with: self, themeObject: themeObject)
+            
+            objc_setAssociatedObject(self, &UISlider.UISliderKeys.maximumTrackTintColor_key, newValue, .OBJC_ASSOCIATION_COPY_NONATOMIC)
         }
-        
-        objc_setAssociatedObject(self, &SwiftyThemeKeys.UISlider.maximumTrackImage_key, configs, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        SwiftyTheme.shared.hashTable.add(self)
-        return self
+    }
+}
+
+extension UISlider {
+    @objc public func st_setThumbImage(_ image: String?, for state: UIControl.State) {
+        let sel = "setThumbImage:forState:"
+        let args: [AnyObject] = [SwiftyThemeImageKey(key: image) as AnyObject, NSNumber(value: state.rawValue)]
+        let themeObject = SwiftyThemeObject(selector: sel, args: args, isEmpty: image == nil)
+        SwiftyTheme.shared.addProperty(with: self, themeObject: themeObject)
+    }
+    
+    @objc public func st_setMinimumTrackImage(_ image: String?, for state: UIControl.State) {
+        let sel = "setMinimumTrackImage:forState:"
+        let args: [AnyObject] = [SwiftyThemeImageKey(key: image) as AnyObject, NSNumber(value: state.rawValue)]
+        let themeObject = SwiftyThemeObject(selector: sel, args: args, isEmpty: image == nil)
+        SwiftyTheme.shared.addProperty(with: self, themeObject: themeObject)
+    }
+    
+    @objc public func st_setMaximumTrackImage(_ image: String?, for state: UIControl.State) {
+        let sel = "setMaximumTrackImage:forState:"
+        let args: [AnyObject] = [SwiftyThemeImageKey(key: image) as AnyObject, NSNumber(value: state.rawValue)]
+        let themeObject = SwiftyThemeObject(selector: sel, args: args, isEmpty: image == nil)
+        SwiftyTheme.shared.addProperty(with: self, themeObject: themeObject)
     }
 }
 
