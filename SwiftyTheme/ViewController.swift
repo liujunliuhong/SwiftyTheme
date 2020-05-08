@@ -33,15 +33,21 @@ class ViewController: UIViewController {
         self.uiSwitch.st_onTintColor = "uiswitch_onTintColor"
         self.view.addSubview(self.uiSwitch)
         
-        
+     
         
         
     }
+    
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let vc = NextViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+}
+
+extension ViewController {
+    
 }
 
 
@@ -53,5 +59,9 @@ class ViewController: UIViewController {
  2、图片
  
  一个开关，从一个tag到另一个tag，发出主题变化的通知
- 
+ */
+
+
+/*
+ 个性主题 > 系统模式 > 默认主题
  */

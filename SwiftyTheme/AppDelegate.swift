@@ -24,6 +24,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SwiftyTheme.shared.addThemeConfiguration(bundlePath: darkModePath, sandBoxRelativePath: nil, themeTag: "dark")
         SwiftyTheme.shared.addThemeConfiguration(bundlePath: whiteModePath, sandBoxRelativePath: nil, themeTag: "white")
         
+        
+        
+        
+        if #available(iOS 13.0, *) {
+            if UITraitCollection.current.userInterfaceStyle == .light {
+                print("😆 light")
+            } else {
+                print("😆 dark")
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+        
+//        if #available(iOS 12.0, *) {
+//            if SwiftyTheme.shared.traitCollection.userInterfaceStyle == .light {
+//                print("😆 light")
+//            } else {
+//                print("😆 dark")
+//            }
+//        } else {
+//
+//        }
         SwiftyTheme.shared.switchToTheme(tag: "white")
         
         let vc = ViewController()
@@ -37,3 +59,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+
+extension UIWindow {
+    // 亮色模式和暗黑模式切换的时候，会通知该回调
+    override open func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+
+        print("traitCollectionDidChange")
+
+        if #available(iOS 12.0, *) {
+            if self.traitCollection.userInterfaceStyle == .dark {
+                print("traitCollectionDidChange - dark")
+                if let darkThemeTag = SwiftyTheme.shared.darkThemeTag {
+                    SwiftyTheme.shared.switchToTheme(tag: darkThemeTag)
+                } else {
+                    SwiftyTheme.shared.switchToTheme(tag: SwiftyTheme.shared.defaultThemeTag)
+                }
+            } else {
+                print("traitCollectionDidChange - light")
+                if let lightThemeTag = SwiftyTheme.shared.lightThemeTag {
+                    SwiftyTheme.shared.switchToTheme(tag: lightThemeTag)
+                } else {
+                    SwiftyTheme.shared.switchToTheme(tag: SwiftyTheme.shared.defaultThemeTag)
+                }
+            }
+        } else {
+            print("traitCollectionDidChange - default")
+            SwiftyTheme.shared.switchToTheme(tag: SwiftyTheme.shared.defaultThemeTag)
+        }
+    }
+}

@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-fileprivate let SwifyThemeCurrentTag: String = "SwifyThemeCurrentTag"
-
 internal struct SwiftyThemeKeys {
     struct Themes {
         static var key = "com.yinhe.swiftyTheme.Themes.key"
@@ -18,6 +16,27 @@ internal struct SwiftyThemeKeys {
     
     struct Closure {
         static var themeChangeClosure_key = "com.yinhe.swiftyTheme.Closure.themeChangeClosure"
+    }
+}
+
+fileprivate extension UserDefaults {
+    struct ThemeKeys {
+        static var themeKey = "com.yinhe.swiftyTheme.UserDefaults.ThemeKeys.themeKey"
+    }
+    
+    static func save(themeTag: String?) {
+        guard let themeTag = themeTag else { return }
+        UserDefaults.standard.set(themeTag, forKey: ThemeKeys.themeKey)
+        UserDefaults.standard.synchronize()
+    }
+    
+    static func removeThemeTag() {
+        UserDefaults.standard.removeObject(forKey: ThemeKeys.themeKey)
+        UserDefaults.standard.synchronize()
+    }
+    
+    static func currentThemeTag() -> String? {
+        return UserDefaults.standard.object(forKey: ThemeKeys.themeKey) as? String
     }
 }
 
@@ -40,15 +59,23 @@ internal struct SwiftyThemeKeys {
     /// key: key    value: value
     @objc private(set) public var currentThemeInfo: [String: String] = [:]
     
+    /// default theme tag
+    @objc private(set) public var defaultThemeTag: String?
+    
+    /// light theme tag
+    @objc private(set) public var lightThemeTag: String?
+    
+    /// dark theme tag
+    @objc private(set) public var darkThemeTag: String?
+    
+    
     /// current theme tag
-    @objc private(set) public var currentThemeTag: String {
+    @objc private(set) public var currentThemeTag: String? {
         set {
-            UserDefaults.standard.set(newValue, forKey: SwifyThemeCurrentTag)
-            UserDefaults.standard.synchronize()
+            UserDefaults.save(themeTag: newValue)
         }
         get {
-            let value = UserDefaults.standard.object(forKey: SwifyThemeCurrentTag) as? String
-            return value ?? ""
+            return UserDefaults.currentThemeTag()
         }
     }
     
@@ -67,9 +94,12 @@ internal struct SwiftyThemeKeys {
 }
 
 extension SwiftyTheme {
-    @objc public func setup() {
-        
+    @objc public func setup(defaultThemeTag: String?, lightThemeTag: String?, darkThemeTag: String?) {
+        self.defaultThemeTag = defaultThemeTag
+        self.lightThemeTag = lightThemeTag
+        self.darkThemeTag = darkThemeTag
     }
+    
     
     @objc private func updateTheme() {
         for (_, object) in self.hashTable.allObjects.enumerated() {
@@ -177,10 +207,20 @@ extension SwiftyTheme {
             SwiftyTheme.shared.currentThemeTag = tag
             
             NotificationCenter.default.post(name: NSNotification.Name(SwiftyTheme.SwifyThemeChangeNotification), object: nil)
+            
+            UserDefaults.save(themeTag: tag)
         }
     }
+}
+
+extension SwiftyTheme: UITraitEnvironment {
+    public var traitCollection: UITraitCollection {
+        return UITraitCollection()
+    }
     
-    
+    public func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        
+    }
 }
 
 extension SwiftyTheme {
@@ -188,13 +228,14 @@ extension SwiftyTheme {
     /// get value with key
     /// - Parameter key: key
     @objc public func getValue(key: String?) -> String? {
+        guard let currentThemeTag = SwiftyTheme.shared.currentThemeTag else { return nil }
         var value: String? = nil
         guard let key = key else {
             return value
         }
         value = SwiftyTheme.shared.currentThemeInfo[key]
         if value == nil {
-            if let themePath = SwiftyTheme.shared.tagInfo[SwiftyTheme.shared.currentThemeTag],
+            if let themePath = SwiftyTheme.shared.tagInfo[currentThemeTag],
                 let themeInfo = NSDictionary(contentsOf: URL(fileURLWithPath: themePath)) as? [String: String] {
                 value = themeInfo[key]
             }

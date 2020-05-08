@@ -52,6 +52,7 @@ class NextViewController: UIViewController {
         
         self.view.addSubview(self.button)
     }
+    
 }
 
 extension NextViewController {
