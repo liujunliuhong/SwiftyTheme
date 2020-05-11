@@ -11,11 +11,18 @@ import UIKit
 
 
 extension UIColor {
-    
     /// hex color -> UIColor
-    /// - Parameter hex: hex(0xFFFFFF，0xffffff)，not case sensitive
-    @objc public static func st_hexColor(hex: Int) -> UIColor? {
-        return UIColor.st_color(string: "\(hex)")
+    /// - Parameters:
+    ///   - hex: hex(0xFFFFFF，0xffffff)，not case sensitive
+    ///   - alpha: alpha
+    @objc public static func st_hexColor(hex: Int, alpha: CGFloat = 1.0) -> UIColor? {
+        let red = CGFloat((Double((hex >> 16) & 0xFF)) / 255.0)
+        let green = CGFloat((Double((hex >> 8) & 0xFF)) / 255.0)
+        let blue = CGFloat((Double(hex & 0xFF)) / 255.0)
+        return UIColor.init(red: red,
+                            green: green,
+                            blue: blue,
+                            alpha: alpha)
     }
     
     
