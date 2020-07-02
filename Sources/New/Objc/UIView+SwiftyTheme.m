@@ -23,47 +23,15 @@ const char st_tint_color_key;
 @implementation UIView (SwiftyTheme)
 #pragma mark Swizzle
 + (void)load{
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        {
-            SEL selector1 = @selector(willMoveToWindow:);
-            SEL selector2 = @selector(st_willMoveToWindow:);
-            Method method1 = class_getInstanceMethod(self, selector1);
-            Method method2 = class_getInstanceMethod(self, selector2);
-            
-            if (class_addMethod(self, selector1, method_getImplementation(method2), method_getTypeEncoding(method2))) {
-                class_replaceMethod(self, selector2, method_getImplementation(method1), method_getTypeEncoding(method1));
-            } else {
-                method_exchangeImplementations(method1, method2);
-            }
-        }
-        
-        {
-            SEL selector1 = @selector(setBackgroundColor:);
-            SEL selector2 = @selector(st_setBackgroundColor:);
-            Method method1 = class_getInstanceMethod(self, selector1);
-            Method method2 = class_getInstanceMethod(self, selector2);
-            
-            if (class_addMethod(self, selector1, method_getImplementation(method2), method_getTypeEncoding(method2))) {
-                class_replaceMethod(self, selector2, method_getImplementation(method1), method_getTypeEncoding(method1));
-            } else {
-                method_exchangeImplementations(method1, method2);
-            }
-        }
-        
-        {
-            SEL selector1 = @selector(setTintColor:);
-            SEL selector2 = @selector(st_setTintColor:);
-            Method method1 = class_getInstanceMethod(self, selector1);
-            Method method2 = class_getInstanceMethod(self, selector2);
-            
-            if (class_addMethod(self, selector1, method_getImplementation(method2), method_getTypeEncoding(method2))) {
-                class_replaceMethod(self, selector2, method_getImplementation(method1), method_getTypeEncoding(method1));
-            } else {
-                method_exchangeImplementations(method1, method2);
-            }
-        }
-    });
+    NSArray<NSString *> *originSelectorNames = @[@"willMoveToWindow:",
+                                                 @"setBackgroundColor:",
+                                                 @"setTintColor:"];
+
+    NSArray<NSString *> *replaceSelectorNames = @[@"st_willMoveToWindow:",
+                                                  @"st_setBackgroundColor:",
+                                                  @"st_setTintColor:"];
+
+    [NSObject st_swizzleWithCls:self originSelectorNames:originSelectorNames replaceSelectorNames:replaceSelectorNames];
 }
 + (void)st_swizzleWillMoveToWindow{
     //[UIView st_swizzleInstanceMethod:@selector(willMoveToWindow:) to:@selector(st_willMoveToWindow:)];

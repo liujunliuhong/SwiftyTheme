@@ -10,28 +10,33 @@
 #import <objc/message.h>
 
 @implementation NSObject (SwiftyThemeSwizzle)
-+ (BOOL)st_swizzleInstanceMethod:(SEL)selector1 to:(SEL)selector2{
-    __block BOOL isSuccess = NO;
-    
++ (void)st_swizzleWithCls:(Class)cls originSelectorNames:(NSArray<NSString *> *)originSelectorNames replaceSelectorNames:(NSArray<NSString *> *)replaceSelectorNames{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        
-        Method method1 = class_getInstanceMethod(self, selector1);
-        Method method2 = class_getInstanceMethod(self, selector2);
-        
-        if (!method1 || !method2) {
-            isSuccess = NO;
+        if (originSelectorNames.count != replaceSelectorNames.count) {
+            return;
         }
         
-        
-        if (class_addMethod(self, selector1, method_getImplementation(method2), method_getTypeEncoding(method2))) {
-            class_replaceMethod(self, selector2, method_getImplementation(method1), method_getTypeEncoding(method1));
-        } else {
-            method_exchangeImplementations(method1, method2);
+        for (int i = 0; i < originSelectorNames.count; i ++) {
+            SEL originSelector = NSSelectorFromString(originSelectorNames[i]);
+            SEL replaceSelector = NSSelectorFromString(replaceSelectorNames[i]);
+            
+            Method originMethod = class_getInstanceMethod(cls, originSelector);
+            Method replaceMethod = class_getInstanceMethod(cls, replaceSelector);
+            
+            if (!originMethod || !replaceMethod) {
+                continue;
+            }
+            
+             BOOL isAddedMethod = class_addMethod(cls, originSelector, method_getImplementation(replaceMethod), method_getTypeEncoding(replaceMethod));
+            
+            if (isAddedMethod) {
+                class_replaceMethod(self, replaceSelector, method_getImplementation(originMethod), method_getTypeEncoding(originMethod));
+            } else {
+                method_exchangeImplementations(originMethod, replaceMethod);
+            }
         }
-        
-        isSuccess = YES;
     });
-    return isSuccess;
 }
+
 @end
