@@ -11,9 +11,14 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    lazy var uiSwitch: UISwitch = {
-        let uiSwitch = UISwitch()
-        return uiSwitch
+//    lazy var uiSwitch: UISwitch = {
+//        let uiSwitch = UISwitch()
+//        return uiSwitch
+//    }()
+    
+    lazy var testView: UIView = {
+      let testView = UIView()
+      return testView
     }()
     
     
@@ -26,22 +31,27 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = .white
         
-        self.view.st_backgroundColor = "uiview_backgroundColor"
+//        self.view.st_backgroundColor = "uiview_backgroundColor"
         
-        self.uiSwitch.center = CGPoint(x: 50, y: UIApplication.shared.statusBarFrame.height + 44.0 + 50)
-        self.uiSwitch.st_onTintColor = "uiswitch_onTintColor"
-        self.view.addSubview(self.uiSwitch)
+//        self.uiSwitch.center = CGPoint(x: 50, y: UIApplication.shared.statusBarFrame.height + 44.0 + 50)
+//        self.uiSwitch.st_onTintColor = "uiswitch_onTintColor"
+//        self.view.addSubview(self.uiSwitch)
         
-     
+        self.testView.backgroundColor = UIColor.st_color(withKey: "")
+     self.view.addSubview(self.testView)
+     self.testView.frame = CGRect(x: 100, y: 350, width: 100, height: 100)
         
         
     }
     
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let vc = NextViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let vc = NextViewController()
+//        self.navigationController?.pushViewController(vc, animated: true)
+        
+        SwiftyThemeManager.setThemeTag("", animated: true)
     }
     
 }

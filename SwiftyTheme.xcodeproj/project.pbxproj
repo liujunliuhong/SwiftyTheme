@@ -17,6 +17,12 @@
 		18A54F052463FADC00DDAC58 /* UITextField+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A54F042463FADC00DDAC58 /* UITextField+SwiftyTheme.swift */; };
 		18A54F072463FBA100DDAC58 /* UITextView+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A54F062463FBA100DDAC58 /* UITextView+SwiftyTheme.swift */; };
 		18A54F092463FBFB00DDAC58 /* UIActivityIndicatorView+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A54F082463FBFB00DDAC58 /* UIActivityIndicatorView+SwiftyTheme.swift */; };
+		18C1C18424ADABF5004920EE /* SwiftyThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C1C18324ADABF5004920EE /* SwiftyThemeManager.swift */; };
+		18C1C18824ADAC9A004920EE /* UIColor+SwiftyTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C1C18724ADAC9A004920EE /* UIColor+SwiftyTheme.m */; };
+		18C1C18B24ADACC2004920EE /* UIImage+SwiftyTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C1C18A24ADACC2004920EE /* UIImage+SwiftyTheme.m */; };
+		18C1C18E24ADAD09004920EE /* SwiftyThemeDynamicColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C1C18D24ADAD09004920EE /* SwiftyThemeDynamicColor.m */; };
+		18C1C19124ADBB2F004920EE /* UIView+SwiftyTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C1C19024ADBB2F004920EE /* UIView+SwiftyTheme.m */; };
+		18C1C19524ADE27B004920EE /* SwiftyThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C1C19424ADE27B004920EE /* SwiftyThemeManager.m */; };
 		18E49AA724592BFB00EF7E64 /* ssss.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 18E49AA624592BFB00EF7E64 /* ssss.stringsdict */; };
 		18E49AAD2459962B00EF7E64 /* theme_white.json in Resources */ = {isa = PBXBuildFile; fileRef = 18E49AAC2459962B00EF7E64 /* theme_white.json */; };
 		3E7EC76DDA240AC7A7DF4D9D /* Pods_SwiftyTheme.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32BC327B7C5F639E0B4CD6F4 /* Pods_SwiftyTheme.framework */; };
@@ -58,6 +64,18 @@
 		18A54F042463FADC00DDAC58 /* UITextField+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+SwiftyTheme.swift"; sourceTree = "<group>"; };
 		18A54F062463FBA100DDAC58 /* UITextView+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+SwiftyTheme.swift"; sourceTree = "<group>"; };
 		18A54F082463FBFB00DDAC58 /* UIActivityIndicatorView+SwiftyTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIActivityIndicatorView+SwiftyTheme.swift"; sourceTree = "<group>"; };
+		18C1C18324ADABF5004920EE /* SwiftyThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyThemeManager.swift; sourceTree = "<group>"; };
+		18C1C18624ADAC9A004920EE /* UIColor+SwiftyTheme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+SwiftyTheme.h"; sourceTree = "<group>"; };
+		18C1C18724ADAC9A004920EE /* UIColor+SwiftyTheme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SwiftyTheme.m"; sourceTree = "<group>"; };
+		18C1C18924ADACC2004920EE /* UIImage+SwiftyTheme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+SwiftyTheme.h"; sourceTree = "<group>"; };
+		18C1C18A24ADACC2004920EE /* UIImage+SwiftyTheme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SwiftyTheme.m"; sourceTree = "<group>"; };
+		18C1C18C24ADAD09004920EE /* SwiftyThemeDynamicColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyThemeDynamicColor.h; sourceTree = "<group>"; };
+		18C1C18D24ADAD09004920EE /* SwiftyThemeDynamicColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwiftyThemeDynamicColor.m; sourceTree = "<group>"; };
+		18C1C18F24ADBB2F004920EE /* UIView+SwiftyTheme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+SwiftyTheme.h"; sourceTree = "<group>"; };
+		18C1C19024ADBB2F004920EE /* UIView+SwiftyTheme.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+SwiftyTheme.m"; sourceTree = "<group>"; };
+		18C1C19224ADBC65004920EE /* SwitfyThemeEnvironment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitfyThemeEnvironment.h; sourceTree = "<group>"; };
+		18C1C19324ADE27B004920EE /* SwiftyThemeManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyThemeManager.h; sourceTree = "<group>"; };
+		18C1C19424ADE27B004920EE /* SwiftyThemeManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwiftyThemeManager.m; sourceTree = "<group>"; };
 		18E49AA624592BFB00EF7E64 /* ssss.stringsdict */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; path = ssss.stringsdict; sourceTree = "<group>"; };
 		18E49AAC2459962B00EF7E64 /* theme_white.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = theme_white.json; sourceTree = "<group>"; };
 		1CAAE5164624D9949731419E /* Pods-SwiftyTheme.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyTheme.debug.xcconfig"; path = "Target Support Files/Pods-SwiftyTheme/Pods-SwiftyTheme.debug.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +155,33 @@
 			path = SwiftyTheme;
 			sourceTree = "<group>";
 		};
+		18C1C18224ADAB58004920EE /* New */ = {
+			isa = PBXGroup;
+			children = (
+				18C1C18324ADABF5004920EE /* SwiftyThemeManager.swift */,
+				18C1C18524ADAC59004920EE /* Objc */,
+			);
+			path = New;
+			sourceTree = "<group>";
+		};
+		18C1C18524ADAC59004920EE /* Objc */ = {
+			isa = PBXGroup;
+			children = (
+				18C1C19324ADE27B004920EE /* SwiftyThemeManager.h */,
+				18C1C19424ADE27B004920EE /* SwiftyThemeManager.m */,
+				18C1C18C24ADAD09004920EE /* SwiftyThemeDynamicColor.h */,
+				18C1C18D24ADAD09004920EE /* SwiftyThemeDynamicColor.m */,
+				18C1C18F24ADBB2F004920EE /* UIView+SwiftyTheme.h */,
+				18C1C19024ADBB2F004920EE /* UIView+SwiftyTheme.m */,
+				18C1C18624ADAC9A004920EE /* UIColor+SwiftyTheme.h */,
+				18C1C18724ADAC9A004920EE /* UIColor+SwiftyTheme.m */,
+				18C1C18924ADACC2004920EE /* UIImage+SwiftyTheme.h */,
+				18C1C18A24ADACC2004920EE /* UIImage+SwiftyTheme.m */,
+				18C1C19224ADBC65004920EE /* SwitfyThemeEnvironment.h */,
+			);
+			path = Objc;
+			sourceTree = "<group>";
+		};
 		18E49AA524592BDA00EF7E64 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -175,6 +220,7 @@
 				8589EF84246305B800E349AD /* NSObject+SwiftyThemePerfom.m */,
 				8589EF7F246305B800E349AD /* NSObject+SwiftyThemeSwizzle.h */,
 				8589EF87246305B800E349AD /* NSObject+SwiftyThemeSwizzle.m */,
+				18C1C18224ADAB58004920EE /* New */,
 			);
 			path = Sources;
 			sourceTree = SOURCE_ROOT;
@@ -301,7 +347,10 @@
 				8589EFA2246305B800E349AD /* UISlider+SwiftyTheme.swift in Sources */,
 				8589EF9B246305B800E349AD /* NSObject+SwiftyThemeSwizzle.m in Sources */,
 				8500009124615EBD0000109E /* NextViewController.swift in Sources */,
+				18C1C19524ADE27B004920EE /* SwiftyThemeManager.m in Sources */,
 				8589EF94246305B800E349AD /* NSObject+SwiftyTheme.swift in Sources */,
+				18C1C18424ADABF5004920EE /* SwiftyThemeManager.swift in Sources */,
+				18C1C18824ADAC9A004920EE /* UIColor+SwiftyTheme.m in Sources */,
 				8589EF9D246305B800E349AD /* SwiftyTheme.swift in Sources */,
 				18A54F092463FBFB00DDAC58 /* UIActivityIndicatorView+SwiftyTheme.swift in Sources */,
 				1804AE09245AABC8003EB9E1 /* OCExampleViewController.m in Sources */,
@@ -315,6 +364,7 @@
 				8589EFA4246305B800E349AD /* UIColor+SwiftyTheme.swift in Sources */,
 				8589EFA5246305B800E349AD /* CALayer+SwiftyTheme.swift in Sources */,
 				8589EF99246305B800E349AD /* UITableView+SwiftyTheme.swift in Sources */,
+				18C1C18B24ADACC2004920EE /* UIImage+SwiftyTheme.m in Sources */,
 				8589EF95246305B800E349AD /* UIButton+SwiftyTheme.swift in Sources */,
 				8589EFA3246305B800E349AD /* UIPageControl+SwiftyTheme.swift in Sources */,
 				8589EF98246305B800E349AD /* NSObject+SwiftyThemePerfom.m in Sources */,
@@ -322,8 +372,10 @@
 				18A54F052463FADC00DDAC58 /* UITextField+SwiftyTheme.swift in Sources */,
 				8589EF97246305B800E349AD /* String+SwiftyTheme.swift in Sources */,
 				8589EF9E246305B800E349AD /* UILabel+SwiftyTheme.swift in Sources */,
+				18C1C19124ADBB2F004920EE /* UIView+SwiftyTheme.m in Sources */,
 				8589EFA6246305B800E349AD /* UIView+SwiftyTheme.swift in Sources */,
 				8589EF96246305B800E349AD /* CAShapeLayer+SwiftyTheme.swift in Sources */,
+				18C1C18E24ADAD09004920EE /* SwiftyThemeDynamicColor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -4,3 +4,9 @@
 
 #import "NSObject+SwiftyThemeSwizzle.h"
 #import "NSObject+SwiftyThemePerfom.h"
+
+
+
+
+#import "SwiftyThemeManager.h"
+#import "UIColor+SwiftyTheme.h"
