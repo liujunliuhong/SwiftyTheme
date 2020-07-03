@@ -7,10 +7,9 @@
 //
 
 #import "SwiftyThemeDynamicColor.h"
+#import "UIColor+SwiftyTheme.h"
 
-
-@interface SwiftyThemeDynamicColorProxy : NSProxy <NSCopying>
-@property (nonatomic, copy) UIColor *(^dynamicProvider)(void);
+@interface SwiftyThemeDynamicColorProxy()
 @property (nonatomic, strong, readonly) UIColor *resolvedColor;
 @end
 
@@ -28,7 +27,7 @@
 
 #pragma mark UIColor
 - (UIColor *)colorWithAlphaComponent:(CGFloat)alpha{
-    return [SwiftyThemeDynamicColor colorWithDynamicProvider:^UIColor * _Nonnull{
+    return [SwiftyThemeDynamicColor _colorWithDynamicProvider:^UIColor * _Nonnull{
         return [self.dynamicProvider() colorWithAlphaComponent:alpha];
     }];
 }
@@ -60,35 +59,6 @@
 
 - (id)copyWithZone:(NSZone *)zone{
     return [[SwiftyThemeDynamicColorProxy alloc] initWithDynamicProvider:[self.dynamicProvider copy]];
-}
-
-@end
-
-
-
-
-
-
-
-
-
-
-@implementation SwiftyThemeDynamicColor
-
-+ (UIColor *)colorWithKey:(NSString *)colorKey{
-    return [self colorWithDynamicProvider:^UIColor * _Nonnull{
-        int index = arc4random() % 2;
-        if (index == 0) {
-            return [UIColor redColor]; // ...
-        } else {
-            return [UIColor orangeColor]; // ...
-        }
-        
-    }];
-}
-
-+ (UIColor *)colorWithDynamicProvider:(UIColor * _Nonnull (^)(void))dynamicProvider{
-    return (SwiftyThemeDynamicColor *)[[SwiftyThemeDynamicColorProxy alloc] initWithDynamicProvider:dynamicProvider];
 }
 
 @end

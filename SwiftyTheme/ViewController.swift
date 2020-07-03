@@ -39,11 +39,12 @@ class ViewController: UIViewController {
 //        self.uiSwitch.st_onTintColor = "uiswitch_onTintColor"
 //        self.view.addSubview(self.uiSwitch)
         
-        self.testView.backgroundColor = UIColor.st_color(withKey: "")
+        
      self.view.addSubview(self.testView)
      self.testView.frame = CGRect(x: 100, y: 350, width: 100, height: 100)
-        
-        
+        //self.testView.backgroundColor = UIColor.st_color(withKey: "")
+        //self.testView.layer.backgroundColor = UIColor.st_cgColor(withKey: "")
+        self.testView.layer.st_backgroundColorKey = "";
     }
     
     
@@ -52,6 +53,7 @@ class ViewController: UIViewController {
 //        self.navigationController?.pushViewController(vc, animated: true)
         
         SwiftyThemeManager.setThemeTag("", animated: true)
+        
     }
     
 }

@@ -47,8 +47,8 @@ class NextViewController: UIViewController {
         self.button.center = CGPoint(x: self.view.center.x, y: self.textLabel.center.y + 150)
         self.button.bounds = CGRect(x: 0, y: 0, width: 100, height: 45)
         
-        self.button.st_setTitleColor("button_title_color", forState: .normal)
-        self.button.st_setTitleColor("button_title_highlighted_color", forState: .highlighted)
+//        self.button.st_setTitleColor("button_title_color", forState: .normal)
+//        self.button.st_setTitleColor("button_title_highlighted_color", forState: .highlighted)
         
         self.view.addSubview(self.button)
     }

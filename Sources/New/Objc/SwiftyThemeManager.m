@@ -8,7 +8,7 @@
 
 #import "SwiftyThemeManager.h"
 #import "UIView+SwiftyTheme.h"
-
+#import "CALayer+SwiftyTheme.h"
 
 static void (^_themeChangeHandler)(BOOL) = nil;
 
@@ -18,12 +18,28 @@ static void (^_themeChangeHandler)(BOOL) = nil;
 
 @implementation SwiftyThemeManager
 
++ (SwiftyThemeManager *)sharedInstance{
+    static SwiftyThemeManager *mgr = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        mgr = [[self alloc] init];
+    });
+    return mgr;
+}
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+    }
+    return self;
+}
+
+
 #pragma mark Public
 + (void)registerWithApplication:(UIApplication *)application syncImmediately:(BOOL)syncImmediately animated:(BOOL)animated{
     __weak UIApplication *weakApp = application;
     __weak typeof(self) weakSelf = self;
-    
-    [self commonSetup];
     
     _themeChangeHandler = ^(BOOL animated){
         __strong UIApplication *strongApp = weakApp;
@@ -49,15 +65,12 @@ static void (^_themeChangeHandler)(BOOL) = nil;
     }
 }
 
-+ (void)commonSetup{
-    [UIView st_swizzleWillMoveToWindow];
-    [UIView st_swizzleSetBackgroundColor];
-    [UIView st_swizzleSetTintColor];
-}
+
 
 + (void)updateUIWithViews:(nullable NSArray<UIView *> *)views viewControllers:(nullable NSArray<UIViewController *> *)viewControllers animated:(BOOL)animated{
     
     [views enumerateObjectsUsingBlock:^(UIView * _Nonnull view, NSUInteger idx, BOOL * _Nonnull stop) {
+        [view.layer stThemeDidChange];
         [view stThemeDidChange];
     }];
     [viewControllers enumerateObjectsUsingBlock:^(UIViewController * _Nonnull vc, NSUInteger idx, BOOL * _Nonnull stop) {

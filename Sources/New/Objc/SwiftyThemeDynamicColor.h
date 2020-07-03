@@ -10,10 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SwiftyThemeDynamicColor : UIColor
-
-+ (UIColor *)colorWithKey:(NSString *)colorKey;
-+ (UIColor *)colorWithDynamicProvider:(UIColor * (^)(void))dynamicProvider;
+@interface SwiftyThemeDynamicColorProxy : NSProxy <NSCopying>
+@property (nonatomic, copy) UIColor *(^dynamicProvider)(void);
+- (instancetype)initWithDynamicProvider:(UIColor *(^)(void))dynamicProvider;
 @end
 
 NS_ASSUME_NONNULL_END

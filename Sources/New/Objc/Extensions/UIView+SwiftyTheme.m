@@ -8,8 +8,9 @@
 
 #import "UIView+SwiftyTheme.h"
 #import <objc/message.h>
-#import "NSObject+SwiftyThemeSwizzle.h"
-#import "SwiftyThemeDynamicColor.h"
+#import "SwiftyThemeSwizzle.h"
+#import "UIColor+SwiftyTheme.h"
+#import "CALayer+SwiftyTheme.h"
 
 const char st_background_color_key;
 const char st_tint_color_key;
@@ -31,17 +32,9 @@ const char st_tint_color_key;
                                                   @"st_setBackgroundColor:",
                                                   @"st_setTintColor:"];
 
-    [NSObject st_swizzleWithCls:self originSelectorNames:originSelectorNames replaceSelectorNames:replaceSelectorNames];
+    [SwiftyThemeSwizzle st_swizzleWithCls:self originSelectorNames:originSelectorNames replaceSelectorNames:replaceSelectorNames];
 }
-+ (void)st_swizzleWillMoveToWindow{
-    //[UIView st_swizzleInstanceMethod:@selector(willMoveToWindow:) to:@selector(st_willMoveToWindow:)];
-}
-+ (void)st_swizzleSetBackgroundColor{
-    //[UIView st_swizzleInstanceMethod:@selector(setBackgroundColor:) to:@selector(st_setBackgroundColor:)];
-}
-+ (void)st_swizzleSetTintColor{
-    //[UIView st_swizzleInstanceMethod:@selector(setTintColor:) to:@selector(st_setTintColor:)];
-}
+
 
 - (void)st_willMoveToWindow:(UIWindow *)window{
     [self st_willMoveToWindow:window];
@@ -49,6 +42,7 @@ const char st_tint_color_key;
         [self st_updateDynamicColors];
         [self st_updateDynamicImages];
     }
+    [self.layer stThemeDidChange];
 }
 - (void)st_setBackgroundColor:(UIColor *)color{
     if ([color isKindOfClass:[SwiftyThemeDynamicColor class]]) {

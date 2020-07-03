@@ -10,10 +10,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface SwiftyThemeDynamicColor : UIColor
++ (UIColor *)_colorWithKey:(NSString *)colorKey;
++ (UIColor *)_colorWithDynamicProvider:(UIColor * (^)(void))dynamicProvider;
+
++ (CGColorRef)_cgColorWithKey:(NSString *)colorKey;
+@end
+
 @interface UIColor (SwiftyTheme)
-
-+ (UIColor *)st_colorWithKey:(NSString *)colorKey;
-
++ (nullable UIColor *)st_colorWithKey:(NSString *)colorKey;
++ (nullable UIColor *)st_colorWithDynamicProvider:(UIColor * (^)(void))dynamicProvider;
 @end
 
 NS_ASSUME_NONNULL_END
