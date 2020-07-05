@@ -15,43 +15,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-        SwiftyThemeManager.register(with: application, syncImmediately: true, animated: true)
+        let darkModePath = Bundle.main.path(forResource: "dark_mode.txt", ofType: nil)
+        let whiteModePath = Bundle.main.path(forResource: "white_mode.txt", ofType: nil)
+        
+        SwiftyThemeManager.sharedInstance().addThemeConfiguration(withBundlePath: darkModePath, sandBoxRelativePath: nil, themeTag: "dark")
+        SwiftyThemeManager.sharedInstance().addThemeConfiguration(withBundlePath: whiteModePath, sandBoxRelativePath: nil, themeTag: "white")
+        
+        SwiftyThemeManager.sharedInstance().register(with: application, syncImmediately: true, animated: true)
+        
+        
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.makeKeyAndVisible()
-        
-//        let darkModePath = Bundle.main.path(forResource: "dark_mode.txt", ofType: nil)
-//        let whiteModePath = Bundle.main.path(forResource: "white_mode.txt", ofType: nil)
-//
-//        SwiftyTheme.shared.addThemeConfiguration(bundlePath: darkModePath, sandBoxRelativePath: nil, themeTag: "dark")
-//        SwiftyTheme.shared.addThemeConfiguration(bundlePath: whiteModePath, sandBoxRelativePath: nil, themeTag: "white")
-//
-//
-//
-//
-//        if #available(iOS 13.0, *) {
-//            if UITraitCollection.current.userInterfaceStyle == .light {
-//                print("😆 light")
-//            } else {
-//                print("😆 dark")
-//            }
-//        } else {
-//
-//        }
-//
-////        if #available(iOS 12.0, *) {
-////            if SwiftyTheme.shared.traitCollection.userInterfaceStyle == .light {
-////                print("😆 light")
-////            } else {
-////                print("😆 dark")
-////            }
-////        } else {
-////
-////        }
-//        SwiftyTheme.shared.switchToTheme(tag: "white")
-        
-        
-        
+           
         
         
         
@@ -60,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = navi
         
         
+        SwiftyThemeManager.sharedInstance().setThemeTag("dark", animated: true)
         
         return true
     }

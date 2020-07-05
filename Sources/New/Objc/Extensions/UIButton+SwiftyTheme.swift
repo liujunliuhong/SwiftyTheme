@@ -13,10 +13,8 @@ extension UIButton {
     open override func stThemeDidChange() {
         super.stThemeDidChange()
         
-        self.st_updateDynamicColors()
-        
         [UIControl.State.normal, .highlighted, .disabled, .selected, .focused].forEach { (state) in
-            if let color = self.titleColor(for: state) as? SwiftyThemeDynamicColor {
+            if let color = self.titleColor(for: state)?.copy() as? SwiftyThemeDynamicColor {
                 self.setTitleColor(color, for: state)
             }
         }

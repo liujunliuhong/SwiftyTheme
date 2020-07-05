@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SwiftyThemeColorTool : NSObject
-+ (nullable UIColor *)colorWithString:(nullable NSString *)colorString;
+
 @end
 
 NS_ASSUME_NONNULL_END

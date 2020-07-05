@@ -16,110 +16,99 @@
 //    return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
 //}
 
-+ (UIColor *)colorWithString:(NSString *)colorString{
-    if (!colorString) {
-        return nil;
-    }
-    NSString *tmpColorString = colorString;
-    tmpColorString = [tmpColorString uppercaseString];
-    tmpColorString = [tmpColorString stringByReplacingOccurrencesOfString:@"#" withString:@""];
-    tmpColorString = [tmpColorString stringByReplacingOccurrencesOfString:@"0X" withString:@""];
-    tmpColorString = [tmpColorString stringByReplacingOccurrencesOfString:@" " withString:@""];
-    
-    //
-    UIColor *rgbColor = nil;
-    if ([tmpColorString containsString:@","]) {
-        NSArray<NSString *> *strings = [tmpColorString componentsSeparatedByString:@","];
-        
-        __block BOOL isNumber = YES;
-        [strings enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSScanner *scan = [NSScanner scannerWithString:obj];
-            float val;
-            isNumber = [scan scanFloat:&val] && [scan isAtEnd];
-            if (!isNumber) {
-                *stop = YES;
-            }
-        }];
-        
-        if (isNumber) {
-            if (strings.count == 3) {
-                CGFloat red = ([strings[0] floatValue]) / 255.0;
-                CGFloat green = ([strings[1] floatValue]) / 255.0;
-                CGFloat blue = ([strings[2] floatValue]) / 255.0;
-                rgbColor = [UIColor colorWithRed:red green:green blue:blue alpha:1];
-            } else if (strings.count == 4) {
-                CGFloat red = ([strings[0] floatValue]) / 255.0;
-                CGFloat green = ([strings[1] floatValue]) / 255.0;
-                CGFloat blue = ([strings[2] floatValue]) / 255.0;
-                CGFloat alpha = [strings[3] floatValue];
-                rgbColor = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
-            }
-        }
-    }
-    if (rgbColor) {
-        return rgbColor;
-    }
-    
-    //
-    UIColor *hexColor = nil;
-    switch (tmpColorString.length) {
-        case 3: // RGB
-        {
-            CGFloat alpha = 1.0f;
-            CGFloat red   = [self colorComponentFrom:colorString start: 0 length: 1];
-            CGFloat green = [self colorComponentFrom:colorString start: 1 length: 1];
-            CGFloat blue  = [self colorComponentFrom:colorString start: 2 length: 1];
-            hexColor = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
-        }
-            break;
-        case 4: // ARGB
-        {
-            CGFloat alpha = [self colorComponentFrom:colorString start: 0 length: 1];
-            CGFloat red   = [self colorComponentFrom:colorString start: 1 length: 1];
-            CGFloat green = [self colorComponentFrom:colorString start: 2 length: 1];
-            CGFloat blue  = [self colorComponentFrom:colorString start: 3 length: 1];
-            hexColor = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
-        }
-            break;
-        case 6: // RRGGBB
-        {
-            CGFloat alpha = 1.0f;
-            CGFloat red   = [self colorComponentFrom:colorString start: 0 length: 2];
-            CGFloat green = [self colorComponentFrom:colorString start: 2 length: 2];
-            CGFloat blue  = [self colorComponentFrom:colorString start: 4 length: 2];
-            hexColor = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
-        }
-            break;
-        case 8: // AARRGGBB
-        {
-            CGFloat alpha = [self colorComponentFrom:colorString start: 0 length: 2];
-            CGFloat red   = [self colorComponentFrom:colorString start: 2 length: 2];
-            CGFloat green = [self colorComponentFrom:colorString start: 4 length: 2];
-            CGFloat blue  = [self colorComponentFrom:colorString start: 6 length: 2];
-            hexColor = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
-        }
-            break;
-        default:
-        {
-            CGFloat alpha = 0;
-            CGFloat red   = 0;
-            CGFloat green = 0;
-            CGFloat blue  = 0;
-            hexColor = [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
-        }
-            break;
-    }
-    return hexColor;
-}
+//+ (UIColor *)colorWithString:(NSString *)colorString{
+//    if (!colorString) {
+//        return nil;
+//    }
+//    CGFloat alpha = 0.0;
+//    CGFloat red = 0.0;
+//    CGFloat green = 0.0;
+//    CGFloat blue = 0.0;
+//
+//    NSString *tmpColorString = colorString;
+//    tmpColorString = [tmpColorString uppercaseString];
+//    tmpColorString = [tmpColorString stringByReplacingOccurrencesOfString:@"#" withString:@""];
+//    tmpColorString = [tmpColorString stringByReplacingOccurrencesOfString:@"0X" withString:@""];
+//    tmpColorString = [tmpColorString stringByReplacingOccurrencesOfString:@" " withString:@""];
+//
+//    //
+//    BOOL flag = NO;
+//    if ([tmpColorString containsString:@","]) {
+//        NSArray<NSString *> *strings = [tmpColorString componentsSeparatedByString:@","];
+//
+//        __block BOOL isNumber = YES;
+//        [strings enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//            NSScanner *scan = [NSScanner scannerWithString:obj];
+//            float val;
+//            isNumber = [scan scanFloat:&val] && [scan isAtEnd];
+//            if (!isNumber) {
+//                *stop = YES;
+//            }
+//        }];
+//
+//        if (isNumber) {
+//            if (strings.count == 3) {
+//                red   = ([strings[0] floatValue]) / 255.0;
+//                green = ([strings[1] floatValue]) / 255.0;
+//                blue  = ([strings[2] floatValue]) / 255.0;
+//                alpha = 1.0;
+//                flag  = YES;
+//            } else if (strings.count == 4) {
+//                red   = ([strings[0] floatValue]) / 255.0;
+//                green = ([strings[1] floatValue]) / 255.0;
+//                blue  = ([strings[2] floatValue]) / 255.0;
+//                alpha = [strings[3] floatValue];
+//                flag  = YES;
+//            }
+//        }
+//    }
+//    if (flag) {
+//        return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+//    }
+//
+//    //
+//
+//    switch (tmpColorString.length) {
+//        case 3: // RGB
+//        {
+//            alpha = 1.0f;
+//            red   = [self colorComponentFrom:tmpColorString start: 0 length: 1];
+//            green = [self colorComponentFrom:tmpColorString start: 1 length: 1];
+//            blue  = [self colorComponentFrom:tmpColorString start: 2 length: 1];
+//        }
+//            break;
+//        case 4: // ARGB
+//        {
+//            alpha = [self colorComponentFrom:tmpColorString start: 0 length: 1];
+//            red   = [self colorComponentFrom:tmpColorString start: 1 length: 1];
+//            green = [self colorComponentFrom:tmpColorString start: 2 length: 1];
+//            blue  = [self colorComponentFrom:tmpColorString start: 3 length: 1];
+//        }
+//            break;
+//        case 6: // RRGGBB
+//        {
+//            alpha = 1.0f;
+//            red   = [self colorComponentFrom:tmpColorString start: 0 length: 2];
+//            green = [self colorComponentFrom:tmpColorString start: 2 length: 2];
+//            blue  = [self colorComponentFrom:tmpColorString start: 4 length: 2];
+//        }
+//            break;
+//        case 8: // AARRGGBB
+//        {
+//            alpha = [self colorComponentFrom:tmpColorString start: 0 length: 2];
+//            red   = [self colorComponentFrom:tmpColorString start: 2 length: 2];
+//            green = [self colorComponentFrom:tmpColorString start: 4 length: 2];
+//            blue  = [self colorComponentFrom:tmpColorString start: 6 length: 2];
+//        }
+//            break;
+//        default:
+//            break;
+//    }
+//    return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+//}
+//
+//
 
 
-
-+ (CGFloat)colorComponentFrom:(NSString *) string start:(NSUInteger)start length:(NSUInteger) length{
-    NSString *substring = [string substringWithRange: NSMakeRange(start, length)];
-    NSString *fullHex = (length == 2) ? substring : [NSString stringWithFormat: @"%@%@", substring, substring];
-    unsigned hexComponent;
-    [[NSScanner scannerWithString: fullHex] scanHexInt: &hexComponent];
-    return hexComponent / 255.0f;
-}
 
 @end

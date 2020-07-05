@@ -8,43 +8,56 @@
 
 #import "UIColor+SwiftyTheme.h"
 #import "SwiftyThemeDynamicColor.h"
-
+#import "SwiftyThemeManager.h"
+#import "SwiftyThemeColorTool.h"
+#import "UIColor+SwiftyThemeConvert.h"
 @implementation SwiftyThemeDynamicColor
 + (UIColor *)_colorWithKey:(NSString *)colorKey{
-    return [self _colorWithDynamicProvider:^UIColor * _Nonnull{
-        int index = arc4random() % 2;
-        if (index == 0) {
-            return [UIColor redColor]; // ...?????
+    if (!colorKey) {
+        return nil;
+    }
+    return [self _colorWithDynamicProvider:^UIColor * _Nullable{
+        NSLog(@"😁");
+        if ([SwiftyThemeManager sharedInstance].currentTagValueInfo && [[SwiftyThemeManager sharedInstance].currentTagValueInfo.allKeys containsObject:colorKey]) {
+            NSString *value = [SwiftyThemeManager sharedInstance].currentTagValueInfo[colorKey];
+            UIColor *color = [UIColor st_convert_colorWithString:value];
+            NSLog(@"😁😁:%@", color);
+            return color;
         } else {
-            return [UIColor orangeColor]; // ...?????
+            return nil;
         }
     }];
 }
-+ (UIColor *)_colorWithDynamicProvider:(UIColor * _Nonnull (^)(void))dynamicProvider{
++ (UIColor *)_colorWithDynamicProvider:(UIColor * _Nullable (^)(void))dynamicProvider{
     return (SwiftyThemeDynamicColor *)[[SwiftyThemeDynamicColorProxy alloc] initWithDynamicProvider:dynamicProvider];
 }
 
 
+
 + (CGColorRef)_cgColorWithKey:(NSString *)colorKey{
-    NSLog(@"😆😆😆😆😆😆😆😆😆");
-    int index = arc4random() % 2;
-    if (index == 0) {
-        return [UIColor purpleColor].CGColor; // ...?????
+    if (!colorKey) {
+        return nil;
+    }
+    if ([SwiftyThemeManager sharedInstance].currentTagValueInfo && [[SwiftyThemeManager sharedInstance].currentTagValueInfo.allKeys containsObject:colorKey]) {
+        NSString *value = [SwiftyThemeManager sharedInstance].currentTagValueInfo[colorKey];
+        UIColor *color = [UIColor st_convert_colorWithString:value];
+        return color.CGColor;
     } else {
-        return [UIColor yellowColor].CGColor; // ...?????
+        return nil;
     }
 }
-
 @end
 
 
 @implementation UIColor (SwiftyTheme)
 
 + (UIColor *)st_colorWithKey:(NSString *)colorKey{
+    if (!colorKey) {
+        return nil;
+    }
     return [SwiftyThemeDynamicColor _colorWithKey:colorKey];
 }
-
-+ (UIColor *)st_colorWithDynamicProvider:(UIColor * _Nonnull (^)(void))dynamicProvider{
++ (UIColor *)st_colorWithDynamicProvider:(UIColor * _Nullable (^)(void))dynamicProvider{
     return [SwiftyThemeDynamicColor _colorWithDynamicProvider:dynamicProvider];
 }
 @end

@@ -13,13 +13,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface SwiftyThemeManager : NSObject
 
+@property (nonatomic, strong, readonly) NSMutableDictionary<NSString *, NSString *> *currentThemeInfo;
+@property (nonatomic, strong, readonly, nullable) NSDictionary<NSString *, NSString *> *currentTagValueInfo;
+@property (nonatomic, copy, readonly) NSString *currentThemeTag;
+
 + (SwiftyThemeManager *)sharedInstance;
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
-+ (void)registerWithApplication:(UIApplication *)application syncImmediately:(BOOL)syncImmediately animated:(BOOL)animated;
+- (void)addThemeConfigurationWithBundlePath:(nullable NSString *)bundlePath sandBoxRelativePath:(nullable NSString *)sandBoxRelativePath themeTag:(NSString *)themeTag;
 
-+ (void)setThemeTag:(NSString *)themeTag animated:(BOOL)animated;
+- (void)registerWithApplication:(UIApplication *)application syncImmediately:(BOOL)syncImmediately animated:(BOOL)animated;
+
+- (void)setThemeTag:(NSString *)themeTag animated:(BOOL)animated;
 
 @end
 

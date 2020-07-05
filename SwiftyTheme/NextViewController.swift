@@ -35,7 +35,7 @@ class NextViewController: UIViewController {
         
         self.textLabel.center = CGPoint(x: self.view.center.x, y: UIApplication.shared.statusBarFrame.height + 44.0 + 100)
         self.textLabel.bounds = CGRect(x: 0, y: 0, width: 200, height: 100)
-        self.textLabel.st_textColor = "label_textColor"
+//        self.textLabel.st_textColor = "label_textColor"
         self.textLabel.st_backgroundColor = "label_backgroundColor"
         self.textLabel.st_themeChangeClosure = {
             print("11111")

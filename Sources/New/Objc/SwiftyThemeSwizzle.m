@@ -31,7 +31,7 @@
              BOOL isAddedMethod = class_addMethod(cls, originSelector, method_getImplementation(replaceMethod), method_getTypeEncoding(replaceMethod));
 
             if (isAddedMethod) {
-                class_replaceMethod(self, replaceSelector, method_getImplementation(originMethod), method_getTypeEncoding(originMethod));
+                class_replaceMethod(cls, replaceSelector, method_getImplementation(originMethod), method_getTypeEncoding(originMethod));
             } else {
                 method_exchangeImplementations(originMethod, replaceMethod);
             }

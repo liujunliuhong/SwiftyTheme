@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -49,6 +49,7 @@
 		8589EFA4246305B800E349AD /* UIColor+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8589EF90246305B800E349AD /* UIColor+SwiftyTheme.swift */; };
 		8589EFA5246305B800E349AD /* CALayer+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8589EF91246305B800E349AD /* CALayer+SwiftyTheme.swift */; };
 		8589EFA6246305B800E349AD /* UIView+SwiftyTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8589EF92246305B800E349AD /* UIView+SwiftyTheme.swift */; };
+		858EFAD324B031AB004D8374 /* UIColor+SwiftyThemeConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 858EFAD224B031AB004D8374 /* UIColor+SwiftyThemeConvert.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +111,8 @@
 		8589EF91246305B800E349AD /* CALayer+SwiftyTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+SwiftyTheme.swift"; sourceTree = "<group>"; };
 		8589EF92246305B800E349AD /* UIView+SwiftyTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+SwiftyTheme.swift"; sourceTree = "<group>"; };
 		8589EF93246305B800E349AD /* NSObject+SwiftyThemePerfom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SwiftyThemePerfom.h"; sourceTree = "<group>"; };
+		858EFAD124B031AB004D8374 /* UIColor+SwiftyThemeConvert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+SwiftyThemeConvert.h"; sourceTree = "<group>"; };
+		858EFAD224B031AB004D8374 /* UIColor+SwiftyThemeConvert.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SwiftyThemeConvert.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +182,8 @@
 				18C1C18D24ADAD09004920EE /* SwiftyThemeDynamicColor.m */,
 				18C1C18624ADAC9A004920EE /* UIColor+SwiftyTheme.h */,
 				18C1C18724ADAC9A004920EE /* UIColor+SwiftyTheme.m */,
+				858EFAD124B031AB004D8374 /* UIColor+SwiftyThemeConvert.h */,
+				858EFAD224B031AB004D8374 /* UIColor+SwiftyThemeConvert.m */,
 				18C5494524AF39800045618A /* SwiftyThemeSwizzle.h */,
 				18C5494624AF39800045618A /* SwiftyThemeSwizzle.m */,
 				18C5493E24AEDE360045618A /* Extensions */,
@@ -199,6 +204,7 @@
 				18C5493F24AEDEAE0045618A /* CALayer+SwiftyTheme.h */,
 				18C5494024AEDEAE0045618A /* CALayer+SwiftyTheme.m */,
 				8589EF81246305B800E349AD /* UIButton+SwiftyTheme.swift */,
+				8589EF8A246305B800E349AD /* UILabel+SwiftyTheme.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -222,7 +228,6 @@
 				8589EF8B246305B800E349AD /* UIImageView+SwiftyTheme.swift */,
 				8589EF91246305B800E349AD /* CALayer+SwiftyTheme.swift */,
 				8589EF82246305B800E349AD /* CAShapeLayer+SwiftyTheme.swift */,
-				8589EF8A246305B800E349AD /* UILabel+SwiftyTheme.swift */,
 				8589EF88246305B800E349AD /* UISwitch+SwiftyTheme.swift */,
 				8589EF8E246305B800E349AD /* UISlider+SwiftyTheme.swift */,
 				8589EF8F246305B800E349AD /* UIPageControl+SwiftyTheme.swift */,
@@ -271,6 +276,7 @@
 				181BF005245926C400080040 /* Sources */,
 				181BF006245926C400080040 /* Frameworks */,
 				181BF007245926C400080040 /* Resources */,
+				F88B4730361D7D08B268053D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -355,6 +361,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		F88B4730361D7D08B268053D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftyTheme/Pods-SwiftyTheme-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftyTheme/Pods-SwiftyTheme-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftyTheme/Pods-SwiftyTheme-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -393,6 +416,7 @@
 				8589EF9E246305B800E349AD /* UILabel+SwiftyTheme.swift in Sources */,
 				18C1C19124ADBB2F004920EE /* UIView+SwiftyTheme.m in Sources */,
 				18C5494724AF39800045618A /* SwiftyThemeSwizzle.m in Sources */,
+				858EFAD324B031AB004D8374 /* UIColor+SwiftyThemeConvert.m in Sources */,
 				8589EFA6246305B800E349AD /* UIView+SwiftyTheme.swift in Sources */,
 				8589EF96246305B800E349AD /* CAShapeLayer+SwiftyTheme.swift in Sources */,
 				18C1C18E24ADAD09004920EE /* SwiftyThemeDynamicColor.m in Sources */,

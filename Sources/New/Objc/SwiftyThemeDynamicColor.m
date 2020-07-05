@@ -53,12 +53,12 @@
 }
 
 #pragma mark NSCopying
-- (id)copy{
-    return [self copyWithZone:nil];
-}
-
-- (id)copyWithZone:(NSZone *)zone{
-    return [[SwiftyThemeDynamicColorProxy alloc] initWithDynamicProvider:[self.dynamicProvider copy]];
-}
+//- (id)copy{
+//    return [self copyWithZone:nil];
+//}
+//
+//- (id)copyWithZone:(NSZone *)zone{
+//    return [[SwiftyThemeDynamicColorProxy alloc] initWithDynamicProvider:[self.dynamicProvider copy]];
+//}
 
 @end

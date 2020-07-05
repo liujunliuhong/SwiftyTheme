@@ -1,14 +1,17 @@
 
 
-"uiview_backgroundColor" = "#2E4653";
+"uiview_backgroundColor" = "#1E90FE";
 
-"uiswitch_onTintColor" = "#1DAEF9";
+"label_textColor" = "#2F4254";
 
-"label_textColor" = "#FF00FF";
-"label_backgroundColor" = "#0000FF";
+"label_textColor1" = "#FE1E90";
+"label_textColor2" = "#90FE1E";
 
-"button_title_color" = "#006400";
-"button_title_highlighted_color" = "#FF0000";
+
+"label_backgroundColor" = "#7891A9";
+
+"button_title_color" = "#27E5E4";
+"button_bg_color" = "#1873CB";
 
 
 

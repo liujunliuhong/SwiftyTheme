@@ -7,18 +7,24 @@
 //
 
 import UIKit
-
+import SnapKit
 
 class ViewController: UIViewController {
 
-//    lazy var uiSwitch: UISwitch = {
-//        let uiSwitch = UISwitch()
-//        return uiSwitch
-//    }()
-    
     lazy var testView: UIView = {
       let testView = UIView()
       return testView
+    }()
+    
+    lazy var testLabel: UILabel = {
+      let testLabel = UILabel()
+        testLabel.textAlignment = .center
+      return testLabel
+    }()
+    
+    lazy var testButton: UIButton = {
+        let testButton = UIButton(type: .custom)
+        return testButton
     }()
     
     
@@ -33,47 +39,56 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         
-//        self.view.st_backgroundColor = "uiview_backgroundColor"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextAction))
         
-//        self.uiSwitch.center = CGPoint(x: 50, y: UIApplication.shared.statusBarFrame.height + 44.0 + 50)
-//        self.uiSwitch.st_onTintColor = "uiswitch_onTintColor"
-//        self.view.addSubview(self.uiSwitch)
+        self.view.addSubview(self.testView)
+        //self.view.addSubview(self.testLabel)
+        //self.view.addSubview(self.testButton)
         
+        self.testView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.view.snp.topMargin).offset(50)
+            make.left.equalToSuperview().offset(40)
+            make.right.equalToSuperview().offset(-40)
+            make.height.equalTo(100)
+        }
         
-     self.view.addSubview(self.testView)
-     self.testView.frame = CGRect(x: 100, y: 350, width: 100, height: 100)
-        //self.testView.backgroundColor = UIColor.st_color(withKey: "")
-        //self.testView.layer.backgroundColor = UIColor.st_cgColor(withKey: "")
-        self.testView.layer.st_backgroundColorKey = "";
+//        self.testLabel.snp.makeConstraints { (make) in
+//            make.top.equalTo(self.testView.snp.bottom).offset(30)
+//            make.left.equalToSuperview().offset(40)
+//            make.right.equalToSuperview().offset(-40)
+//            make.height.equalTo(50)
+//        }
+        
+//        self.testButton.snp.makeConstraints { (make) in
+//            make.top.equalTo(self.testLabel.snp.bottom).offset(30)
+//            make.left.equalToSuperview().offset(40)
+//            make.right.equalToSuperview().offset(-40)
+//            make.height.equalTo(50)
+//        }
+        
+        self.testView.backgroundColor = UIColor.st_color(withKey: "uiview_backgroundColor")
+        
+//        self.testLabel.backgroundColor = UIColor.st_color(withKey: "label_backgroundColor")
+//        self.testLabel.textColor = UIColor.st_color(withKey: "label_textColor")
+        
+//        self.testButton.backgroundColor = UIColor.st_color(withKey: "button_bg_color")
+//        self.testButton.setTitleColor(UIColor.st_color(withKey: "button_title_color"), for: .normal)
     }
     
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        let vc = NextViewController()
-//        self.navigationController?.pushViewController(vc, animated: true)
-        
-        SwiftyThemeManager.setThemeTag("", animated: true)
-        
+
+        if SwiftyThemeManager.sharedInstance().currentThemeTag == "dark" {
+            SwiftyThemeManager.sharedInstance().setThemeTag("white", animated: true)
+        } else {
+            SwiftyThemeManager.sharedInstance().setThemeTag("dark", animated: true)
+        }
     }
     
 }
 
 extension ViewController {
-    
+    @objc func nextAction() {
+        
+    }
 }
-
-
-
-
-/*
- 主题切换：
- 1、颜色
- 2、图片
- 
- 一个开关，从一个tag到另一个tag，发出主题变化的通知
- */
-
-
-/*
- 个性主题 > 系统模式 > 默认主题
- */

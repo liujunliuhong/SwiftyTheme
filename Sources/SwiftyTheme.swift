@@ -254,7 +254,8 @@ extension SwiftyTheme {
     /// get color with key
     /// - Parameter key: key
     @objc public func getColor(key: String?) -> UIColor? {
-        guard let key = key else { return nil }
-        return UIColor.st_color(string: key)
+//        guard let key = key else { return nil }
+//        return UIColor.st_color(string: key)
+        return nil
     }
 }

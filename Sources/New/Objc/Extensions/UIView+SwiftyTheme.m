@@ -32,17 +32,44 @@ const char st_tint_color_key;
                                                   @"st_setBackgroundColor:",
                                                   @"st_setTintColor:"];
 
-    [SwiftyThemeSwizzle st_swizzleWithCls:self originSelectorNames:originSelectorNames replaceSelectorNames:replaceSelectorNames];
+    [UIView st_swizzleWithCls:self originSelectorNames:originSelectorNames replaceSelectorNames:replaceSelectorNames];
 }
++ (void)st_swizzleWithCls:(Class)cls originSelectorNames:(NSArray<NSString *> *)originSelectorNames replaceSelectorNames:(NSArray<NSString *> *)replaceSelectorNames{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (originSelectorNames.count != replaceSelectorNames.count) {
+            return;
+        }
 
+        for (int i = 0; i < originSelectorNames.count; i ++) {
+            SEL originSelector = NSSelectorFromString(originSelectorNames[i]);
+            SEL replaceSelector = NSSelectorFromString(replaceSelectorNames[i]);
+
+            Method originMethod = class_getInstanceMethod(cls, originSelector);
+            Method replaceMethod = class_getInstanceMethod(cls, replaceSelector);
+
+            if (!originMethod || !replaceMethod) {
+                continue;
+            }
+
+             BOOL isAddedMethod = class_addMethod(cls, originSelector, method_getImplementation(replaceMethod), method_getTypeEncoding(replaceMethod));
+
+            if (isAddedMethod) {
+                class_replaceMethod(cls, replaceSelector, method_getImplementation(originMethod), method_getTypeEncoding(originMethod));
+            } else {
+                method_exchangeImplementations(originMethod, replaceMethod);
+            }
+        }
+    });
+}
 
 - (void)st_willMoveToWindow:(UIWindow *)window{
     [self st_willMoveToWindow:window];
     if (window) {
         [self st_updateDynamicColors];
         [self st_updateDynamicImages];
+        [self stThemeDidChange];
     }
-    [self.layer stThemeDidChange];
 }
 - (void)st_setBackgroundColor:(UIColor *)color{
     if ([color isKindOfClass:[SwiftyThemeDynamicColor class]]) {
@@ -67,8 +94,8 @@ const char st_tint_color_key;
     [self.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [obj stThemeDidChange];
     }];
-    [self setNeedsLayout];
-    [self setNeedsDisplay];
+//    [self setNeedsLayout];
+//    [self setNeedsDisplay];
     [self st_updateDynamicColors];
     [self st_updateDynamicImages];
 }

@@ -12,8 +12,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (SwiftyTheme) <SwitfyThemeEnvironment>
-
-
 - (void)st_updateDynamicColors;
 - (void)st_updateDynamicImages NS_REQUIRES_SUPER;
 @end
